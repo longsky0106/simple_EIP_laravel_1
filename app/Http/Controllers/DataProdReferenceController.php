@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataProdReferenceModel;
 use Illuminate\Http\Request;
 
 class DataProdReferenceController extends Controller
@@ -13,7 +14,9 @@ class DataProdReferenceController extends Controller
      */
     public function index()
     {
-        //
+        $DataProdReference = DataProdReferenceModel::all();
+        // return view('DataProdReference.index')->withDataProdReference(DataProdReferenceModel::all());
+        return view('DataProdReference.index')->with('DataProdReference',$DataProdReference);
     }
 
     /**
