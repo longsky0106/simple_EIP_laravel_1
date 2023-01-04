@@ -18,6 +18,11 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            #index_menu {
+                border-width: 2px;
+                border-color: black;
+                /* background-color: antiquewhite; */
+            }
         </style>
     </head>
     <body class="antialiased">
@@ -36,8 +41,8 @@
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div id="index_menu" class="flex-col border-solid border-2 border-black">
+            <div class="max-w-6xl">
+                <div id="index_menu" class="flex-col bg-black">
                     <div class="flex">
                         <div id="menu_toggle_button">
                           <div class="menubar"></div>
@@ -50,7 +55,7 @@
                       </div>
                       <div id="select_item" class="flex-col">
                         <a href="#" class="flex">首頁</a>
-                        <a href="#" class="flex">貨品規格與銷售資料管理</a>
+                        <a href="{{ router('DataProdReference.index')}}" class="flex">貨品規格與銷售資料管理</a>
                       </div>
                 </div>
 
