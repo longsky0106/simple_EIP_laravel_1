@@ -14,9 +14,9 @@ class DataProdReferenceController extends Controller
      */
     public function index()
     {
-        $DataProdReference = DataProdReferenceModel::all();
+        $DataProdsReference = DataProdReferenceModel::all();
         // return view('DataProdReference.index')->withDataProdReference(DataProdReferenceModel::all());
-        return view('DataProdReference.index')->with('DataProdReference',$DataProdReference);
+        return view('DataProdReference.index')->with('DataProdsReference',$DataProdsReference);
     }
 
     /**
