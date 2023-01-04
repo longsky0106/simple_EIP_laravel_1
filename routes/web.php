@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::resource('DataProdReference', 'DataProdReferenceController');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
