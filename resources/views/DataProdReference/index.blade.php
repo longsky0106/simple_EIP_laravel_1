@@ -18,18 +18,17 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-            #index_menu {
-                border-width: 2px;
-                border-color: black;
-                /* background-color: antiquewhite; */
-            }
         </style>
     </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    <body class="">
+        <div class="">
         @foreach($DataProdsReference as $DataProdReference)
-            {{ $DataProdReference->Model }}<br>
-            {{ $DataProdReference->SK_NO1 }}
+            <div class="flex-col w-full border-b-2 border-b-black">
+                {{ $DataProdReference->Model }}<br>
+                {{ $DataProdReference->SK_NO1 }}|
+                <hr>
+            </div>
+
         @endforeach
 
         </div>
