@@ -61,7 +61,8 @@ class DataProdReferenceController extends Controller
                $query->orwhere($search_column2[$i], 'LIKE',  '%'.$search_text.'%');
             }      
         })
-        ->paginate(250)
+        ->limit(1000)
+        ->get()
         ->sortBy('Model');
 
         // return view('DataProdReference.index')->withDataProdReference(DataProdReferenceModel::all());
