@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        @vite('resources/css/app.css')
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -19,16 +19,92 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-    </head>
-    <body class="">
-        <div class="">
-        @foreach($DataProdsReference as $DataProdReference)
-            <div class="flex-col w-full border-b-2 border-b-black">
-                {{ $DataProdReference->Model }}<br>
-                {{ $DataProdReference->SK_NO1 }}|
-                <hr>
-            </div>
 
+
+
+    </head>
+    <body>
+        <div>
+            <div class="flex"><!-- pro_con_L: 欄，dr: 列 -->
+				<div class="flex">
+				    <div class="flex-1 w-9" >編號</div>
+				    <div class="flex-1 w-9">選擇</div>
+				</div>
+				<div class="flex">
+                    <div class="flex-auto w-20" >圖片</div>
+                    <div class="flex-auto w-24" >型號 / 料號</div>
+                    <div class="flex-auto w-40" >產品分類</div>
+                    <div class="flex-auto w-32" >品名</div>
+                    <div class="flex-auto w-20" >官網頁面</div>
+                    <div class="flex-auto w-24" >售價與成本</div>
+                    <div class="flex-auto w-10" >庫存</div>
+                    <div class="flex-auto w-52" >銷售頁面範本</div>
+				</div>
+			</div>
+
+        @foreach($DataProdsReference as $DataProdReference)
+            @php($count= $loop->index + 1)
+
+			<div class="flex">
+				<div class="flex">
+					<div class="flex pn_L">
+						 <div class="hidden" >編號</div>
+						 <div class="sk_data_L0 dr1_L" >{{ $count }}</div>
+					</div>
+					<div class="flex pn_L">
+						<div class="hidden" >選擇</div>
+						<div class="sk_data_L1 dr1_L" id="list_no<?=$DataProdReference?>" ><input type="checkbox" name="Data_Prod_Ref_ID[]" value="{{ $DataProdReference->ID }}" autocomplete="off"></div>
+					</div>
+				</div>
+				<div class="flex">
+					<div class="pro_con_L2 pn_L">
+						<div class="hidden" >圖片</div>
+						<div class="sk_data_L2 dr1_L" > </div>
+					</div>
+					<div class="pro_con_L3 pn_L">
+						<div class="hidden" >型號/料號</div>
+						<div class="sk_data_L3 dr1_L" >
+							<div id=""><a href="javascript:prod_data_edit('{{ $DataProdReference->Model }}');">{{ $DataProdReference->Model }}</a></div>
+							<div>{{ $DataProdReference->SK_NO1 }}</div>
+						</div>
+					</div>
+					<div class="pro_con_L4 pn_L">
+						<div class="hidden" >分類</div>
+						<div class="sk_data_L4 dr1_L" >{{ $DataProdReference->SK_USE }} > {{ $DataProdReference->SK_LOCATE }}</div>
+					</div>
+					<div class="pro_con_L5 pn_L">
+						<div class="hidden" >品名</div>
+						<div class="sk_data_L5 dr1_L" >
+							<div>{{ $DataProdReference->fd_name }}</div><hr>
+                            <div>{{ $DataProdReference->SK_NAME?"廠內: ".$DataProdReference->SK_NAME:"" }}</div>
+						</div>
+					</div>
+					<div class="pro_con_L8 pn_L">
+						<div class="hidden" >官網頁面</div>
+						<div class="sk_data_L8 dr1_L" >
+						
+						</div>
+					</div>
+					<div class="pro_con_L9 pn_L">
+						<div class="hidden" >售價與成本</div>
+						<div class="sk_data_L9 dr1_L" >
+							<div>售價: <div class="price">{{ $DataProdReference->Price }}</div></div>
+							<div>建議售價: <div class="price">{{ $DataProdReference->{'Suggested Price'} }}</div></div>
+							<div>成本: <div class="price">{{ $DataProdReference->{'Cost Price'} }}</div></div>
+						</div>
+					</div>
+					<div class="pro_con_L10 pn_L">
+						<div class="hidden" >庫存</div>
+						<div class="sk_data_L10 dr1_L" >{{ round($DataProdReference->SPH_NowQtyByWare) }}</div>
+					</div>
+					<div class="pro_con_L11 pn_L">
+						<div class="hidden" >銷售頁面範本</div>
+						<div class="sk_data_L11 dr1_L" >
+						
+						</div>
+					</div>
+				</div>
+			</div>
         @endforeach
 
         </div>
