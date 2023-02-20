@@ -28,29 +28,62 @@
     <body>
         <div>
             <div class="flex">
-				<div class="flex">
-				    <div class="flex-3 min-w-[2em] border-[1px] 
-								border-red-400 bg-red-900 
+				<div class="flex h-full">
+				    <div class="flex-3 min-w-[2em] w-full h-full 
+								border-[1px] inline-block
+								border-[#D4AEAE] bg-[#a16872] 
 								text-white font-bold"
 					>
 						編號
 					</div>
-				    <div class="flex-3 min-w-[2em] border-[1px] 
-								border-red-400 bg-red-900 
+				    <div class="min-w-[2em] w-full h-full inline-block border-[1px] 
+								border-[#D4AEAE] bg-[#a16872] 
 								text-white font-bold"
 					>
 						選擇
 					</div>
 				</div>
-				<div class="flex">
-                    <div class="flex-auto w-20 border-2" >圖片</div>
-                    <div class="flex-auto w-24 border-2" >型號 / 料號</div>
-                    <div class="flex-auto w-52 border-2" >產品分類</div>
-                    <div class="flex-auto w-56 border-2" >品名</div>
-                    <div class="flex-auto w-20 border-2" >官網頁面</div>
-                    <div class="flex-auto w-24 border-2" >售價與成本</div>
-                    <div class="flex-auto w-10 border-2" >庫存</div>
-                    <div class="flex-auto w-52 border-2" >銷售頁面範本</div>
+				<div class="flex h-full">
+                    <div class="w-16 h-full inline-block border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold" 
+					>
+						圖片
+					</div>
+                    <div class="w-32 h-full inline-block border-[1px]
+							border-[#D4AEAE] bg-[#a16872]
+							text-white font-bold" 
+					>
+						型號 / 料號
+					</div>
+                    <div class="w-36 h-full inline-block border-[1px]
+							border-[#D4AEAE] bg-[#a16872]
+							text-white font-bold" 
+					>
+						產品分類
+					</div>
+                    <div class="min-w-[14em] w-full inline-block 
+								flex-[50] border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold overflow-x-auto" >
+								品名
+					</div>
+                    <div class="w-[4.2em] inline-block border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold" >官網頁面
+					</div>
+                    <div class="w-32 inline-block border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold" >售價與成本
+					</div>
+                    <div class="w-12 inline-block border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold" >庫存
+					</div>
+                    <div class="w-28 inline-block border-[1px]
+								border-[#D4AEAE] bg-[#a16872]
+								text-white font-bold" >銷售頁面範本
+					</div>
 				</div>
 			</div>
 
@@ -59,59 +92,80 @@
 
 			<div class="flex">
 				<div class="flex">
-					<div class="flex w-9 border-2">
+					<div class="flex-3 min-w-[2em] h-full 
+								border-[1px] border-[#D4AEAE]">
 						 <div class="hidden" >編號</div>
-						 <div class="sk_data_L0 dr1_L" >{{ $count }}</div>
+						 <div class="inline-block w-full h-full relative" >{{ $count }}</div>
 					</div>
-					<div class="flex w-9 border-2">
+					<div class="min-w-[2em] h-full 
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >選擇</div>
-						<div class="sk_data_L1 dr1_L" id="list_no<?=$DataProdReference?>" ><input type="checkbox" name="Data_Prod_Ref_ID[]" value="{{ $DataProdReference->ID }}" autocomplete="off"></div>
+						<div class="inline-block w-full h-full relative" 
+							 id="list_no<?=$DataProdReference?>" >
+							 <input type="checkbox" name="Data_Prod_Ref_ID[]" value="{{ $DataProdReference->ID }}" autocomplete="off">
+						</div>
 					</div>
 				</div>
-				<div class="flex">
-					<div class="w-20 border-2 pn_L">
+				<div class="flex flex-[18] flex-row h-full">
+					<div class="w-16 h-full 
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >圖片</div>
-						<div class="sk_data_L2 dr1_L" > </div>
+						<div class="flex w-full h-full relative" >
+							<div class="border-2 border-[#9e9e9f] m-1
+										text-lg text-[#9e9e9f] text-center rounded-md p-[2px]">暫無圖片</div>
+						</div>
 					</div>
-					<div class="flex-auto w-24 border-2">
+					<div class="w-32 overflow-x-auto border-[1px] 
+								border-[#D4AEAE]">
 						<div class="hidden" >型號/料號</div>
-						<div class="sk_data_L3 dr1_L" >
-							<div id=""><a href="javascript:prod_data_edit('{{ $DataProdReference->Model }}');">{{ $DataProdReference->Model }}</a></div>
+						<div class="inline-block w-full h-full relative" >
+							<div id="">
+								<a href="javascript:prod_data_edit('{{ $DataProdReference->Model }}');">{{ $DataProdReference->Model }}</a>
+							</div>
 							<div>{{ $DataProdReference->SK_NO1 }}</div>
 						</div>
 					</div>
-					<div class="flex-auto w-52 border-2">
+					<div class="w-36 h-full border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >分類</div>
-						<div class="sk_data_L4 dr1_L" >{{ $DataProdReference->SK_USE }} > {{ $DataProdReference->SK_LOCATE }}</div>
+						<div class="inline-block w-full h-full relative" >{{ $DataProdReference->SK_USE }} > {{ $DataProdReference->SK_LOCATE }}</div>
 					</div>
-					<div class="pro_con_L5 pn_L">
+					<div class="min-w-[14em] flex-[50] overflow-x-auto
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >品名</div>
-						<div class="sk_data_L5 dr1_L" >
+						<div class="w-max inline-block relative" >
 							<div>{{ $DataProdReference->fd_name }}</div><hr>
                             <div>{{ $DataProdReference->SK_NAME?"廠內: ".$DataProdReference->SK_NAME:"" }}</div>
 						</div>
 					</div>
-					<div class="pro_con_L8 pn_L">
+					<div class="w-16 
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >官網頁面</div>
-						<div class="sk_data_L8 dr1_L" >
+						<div class="inline-block w-full h-full relative" >
 						
 						</div>
 					</div>
-					<div class="pro_con_L9 pn_L">
+					<div class="w-32
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >售價與成本</div>
-						<div class="sk_data_L9 dr1_L" >
-							<div>售價: <div class="price">{{ $DataProdReference->Price }}</div></div>
-							<div>建議售價: <div class="price">{{ $DataProdReference->{'Suggested Price'} }}</div></div>
-							<div>成本: <div class="price">{{ $DataProdReference->{'Cost Price'} }}</div></div>
+						<div class="inline-block w-full h-full relative" >
+							<div>售價: <div class="m-auto float-right">{{ $DataProdReference->Price }}</div></div>
+							<div>建議售價: <div class="m-auto float-right">{{ $DataProdReference->{'Suggested Price'} }}</div></div>
+							<div>成本: <div class="m-auto float-right">{{ $DataProdReference->{'Cost Price'} }}</div></div>
 						</div>
 					</div>
-					<div class="pro_con_L10 pn_L">
+					<div class="w-12
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >庫存</div>
-						<div class="sk_data_L10 dr1_L" >{{ round($DataProdReference->SPH_NowQtyByWare) }}</div>
+						<div class="inline-block w-full h-full 
+									relative text-end" >
+									{{ round($DataProdReference->SPH_NowQtyByWare) }}
+						</div>
 					</div>
-					<div class="pro_con_L11 pn_L">
+					<div class="w-28
+								border-[1px] border-[#D4AEAE]">
 						<div class="hidden" >銷售頁面範本</div>
-						<div class="sk_data_L11 dr1_L" >
+						<div class="inline-block w-full h-full
+									relative" >
 						
 						</div>
 					</div>
