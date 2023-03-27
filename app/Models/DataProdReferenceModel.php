@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataProdReferenceModel extends Model
 {
-    protected $connection = 'mysql2';
+    protected $connection = 'sqlsrv';
     protected $table = 'Data_Prod_Reference';
     protected $fillable =   [
                                 'Model',
