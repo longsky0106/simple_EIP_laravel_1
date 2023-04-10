@@ -12,9 +12,12 @@ class DataProdReferenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $search_text = "";
+        $perPage = $request->get('per_page', 10); // 在index加入輸入參數以便從view輸入想要的每頁數量，並設定預設值為 10
+        $search_text = $request->get('search_text', ''); // 取得搜尋關鍵字
+        // $search_text = "";
+
         $search_column = array('Model', 'SSTOCK.SK_USE', 'SSTOCK.SK_LOCATE', 'SSTOCKFD.fd_name', 'SSTOCKFD_temp.fd_name'
                             , 'SK_NO1', 'SK_NO2', 'SK_NO3', 'SK_NO4');
         $search_column2 = array('Model', 'SK_NO1', 'SK_NO2', 'SK_NO3', 'SK_NO4');
@@ -61,11 +64,12 @@ class DataProdReferenceController extends Controller
                $query->orwhere($search_column2[$i], 'LIKE',  '%'.$search_text.'%');
             }      
         })
-        ->limit(1000)
-        ->get()
-        ->sortBy('Model');
+        ->orderBy('Model')
+        ->paginate($perPage);
 
-        return view('DataProdReference.index')->with('DataProdsReference',$DataProdsReference);
+        // return view('DataProdReference.index')->with('DataProdsReference',$DataProdsReference);
+        return view('DataProdReference.index', compact('DataProdsReference', 'perPage', 'search_text')); // 將變數傳回給View
+
     }
 
     /**
