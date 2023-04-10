@@ -27,33 +27,29 @@
     </head>
     <body>
 		<div id="search_bar_L" class="flex items-center">
-			<input type="text" placeholder="請輸入產品型號" name="model">
-			<button id="search_btn" type="" name="" value="">搜尋</button>
+
+			<form action="{{ url()->current() }}" method="GET">
+				<input type="text" name="search_text" value="{{ $search_text }}" placeholder="請輸入產品型號">
+				<button type="submit">搜尋</button>
+			</form>
+
 			 每頁顯示數量
-			 <select id="display_per_page" name="display_per_page">
-				 <option value="10">10</option>
-				 <option value="20">20</option>
-				 <option value="50">50</option>
-				 <option value="100">100</option>
-			  </select>
-			  @php
-			  	$row_count = 1;
-			  	$per_page_count = 1;
-			  	$page = 2;
-				$search_text = "";
-			  @endphp	
-				@if($row_count)
-					<div id="pagejump">	
-	
-						@for($i=1;$i<=$per_page_count;$i++)
-							@if($i==$page)
-								[&thinsp;<?=$i?>&thinsp;]
-							@else
-								<a href="javascript:load_page(<?=$i.",'".$search_text."'"?>)">[&thinsp;<?=$i?>&thinsp;]</a>
-							@endif
-						@endfor		
-					</div>
+			  <form action="{{ url()->current() }}" method="GET">
+				<select name="per_page" onchange="this.form.submit()">
+					<!-- 如果GET url的per_page為10然後 => $perPage，就將選定該述職的選項 -->
+					<option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+					<option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+					<option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+					<option value="100" {{ $perPage == 100 ? 'selected' : '' }}>100</option>
+				</select>
+			</form>
+			  
+			 
+				@if($DataProdsReference->count())
+					<!-- 將網址中per_page的數值傳遞到$perPage之後再傳給links() -->
+					{{$DataProdsReference->appends(['per_page' => $perPage])->onEachSide(1)->links()}}
 				@endif
+
 	  </div>
 		<hr>
 		<div id="main_content_L">
