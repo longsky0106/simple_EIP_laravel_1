@@ -29,12 +29,14 @@
 		<div id="search_bar_L" class="flex items-center">
 
 			<form action="{{ url()->current() }}" method="GET">
+				@csrf
 				<input type="text" name="search_text" value="{{ $search_text }}" placeholder="請輸入產品型號">
 				<button type="submit">搜尋</button>
 			</form>
 
 			 每頁顯示數量
 			  <form action="{{ url()->current() }}" method="GET">
+				@csrf
 				<select name="per_page" onchange="this.form.submit()">
 					<!-- 如果GET url的per_page為10然後 => $perPage，就將選定該述職的選項 -->
 					<option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
