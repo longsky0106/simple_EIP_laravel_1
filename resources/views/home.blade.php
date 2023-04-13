@@ -55,7 +55,7 @@
                       </div>
                       <div id="select_item" class="flex-col">
                         <a href="#" class="flex">首頁</a>
-                        <a href="{{ route('DataProdReference.index')}}" class="flex">貨品規格與銷售資料管理</a>
+                        <a href="{{ route('ProductDataManage.index')}}" class="flex">貨品規格與銷售資料管理</a>
                       </div>
                 </div>
 

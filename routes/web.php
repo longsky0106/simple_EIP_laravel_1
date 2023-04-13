@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('DataProdReference', 'App\Http\Controllers\DataProdReferenceController');
+Route::resource('ProductDataManage', 'App\Http\Controllers\ProductDataController');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
