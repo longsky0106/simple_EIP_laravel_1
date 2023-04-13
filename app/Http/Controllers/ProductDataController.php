@@ -16,6 +16,7 @@ class ProductDataController extends Controller
     {
         $perPage = $request->get('per_page', 10); // 在index加入輸入參數以便從view輸入想要的每頁數量，並設定預設值為 10
         $search_text = $request->get('search_text', ''); // 取得搜尋關鍵字
+        $search_text = strip_tags($search_text);
         // $search_text = "";
 
         $search_column = array('Model', 'SSTOCK.SK_USE', 'SSTOCK.SK_LOCATE', 'SSTOCKFD.fd_name', 'SSTOCKFD_temp.fd_name'
