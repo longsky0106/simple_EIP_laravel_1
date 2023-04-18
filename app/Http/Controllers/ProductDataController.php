@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataProdReferenceModel;
 use App\Models\MenuProdTypeShop;
+use App\Models\MenuProdClassShop;
 use Illuminate\Http\Request;
 
 class ProductDataController extends Controller
@@ -80,22 +81,20 @@ class ProductDataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        // SELECT
-		// 		[shop_menu1_id]
-		// 		,[shop_menu1_name]
-		// 		,[shop_menu1_rem]
-		// 		FROM [PCT].[dbo].[Menu_Prod_Type_shop]
-		// 		WHERE shop_menu1_id !=:shop_menu1_id
-        
+    {      
         $shopMenus1 = MenuProdTypeShop::select('shop_menu1_id',
                                                 'shop_menu1_name',
                                                 'shop_menu1_rem')
-                                        // ->where('shop_menu1_id','1')
                                         ->get();
-
-
         return view('ProductDataManage.create', compact('shopMenus1'));
+    }
+
+    public function getShopMenu2($id)
+    {
+        $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $id)->get();
+        $shopMenus2 = json_decode($shopMenus2, true);
+        $shopMenus2 = $shopMenus2[0]['menu_prod_class_shop'];
+        return view('ProductDataManage.select-shopMenus2', compact('shopMenus2'));
     }
 
     /**
@@ -106,7 +105,7 @@ class ProductDataController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->input('spec_item_value_en');
+        $input = $request->input();
         dd(($input));
 
     }
