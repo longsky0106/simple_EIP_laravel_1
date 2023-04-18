@@ -10,9 +10,11 @@ class MenuProdTypeShop extends Model
     // use HasFactory;
     protected $connection = 'sqlsrv';
     protected $table = 'Menu_Prod_Type_shop';
-    protected $fillable =   [
-                                'shop_menu1_name',
-                                'shop_menu1_rem',
-                                'pct_menu1_id'
-                            ];
+
+    public function MenuProdClassShop()
+    {
+        return $this->hasMany(MenuProdClassShop::class,'shop_menu1_index','shop_menu1_id');
+    }
+
+    
 }
