@@ -15,21 +15,20 @@
         </style>
 		
 		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 		<script src="{{ asset('js/main.js')}}"></script>
 
 		@vite('resources/css/app.css')
-        
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 		<style>
             body {
                 font-family: 'Nunito', sans-serif;
             }
         </style>
 
-
-
     </head>
     <body>
-		
 		<div style="margin:0 0 0.8em 0"><span style="color:blue;font-size:26px;"><b>銘鵬規格小幫手Web-資料新增</b></span></div>
 		<form action="{{ route('ProductDataManage.store') }}" method="post">
 			<label style="font-size:1.2em;color:red;font-weight:bold;">型號
@@ -43,7 +42,9 @@
 					料號1(主要)<input type="text" id="" name="SK_NO1" value=""><br>
 					料號2(次要)<input type="text" id="" name="SK_NO2" value=""><br>
 					料號3(備用)<input type="text" id="" name="SK_NO3" value=""><br>
-					料號4(臨時)<input type="text" id="" name="SK_NO4" value=""><br>
+					料號4(臨時)<input type="text" id="" name="SK_NO4" value="">
+					<input type="button" id="SK_NO_TEMP_add_btn" class="bg-slate-100 border-l border-b border-r border-black hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" value="新增" onClick="">
+					<br>
 					售價&emsp;&emsp;<input type="text" id="" name="Price" value=""><br>
 					建議售價<input type="text" id="" name="Suggested_Price" value=""><br>
 					成本&emsp;&emsp;<input type="text" id="" name="Cost_Price" value=""><br>
@@ -61,9 +62,7 @@
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
 										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
-												
 									@endforeach
-
 								</select>
 								<select id="ProdType" name="ProdType">
 									<option value="0">選擇產品類別</option>
