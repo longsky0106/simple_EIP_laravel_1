@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::resource('ProductDataManage', 'App\Http\Controllers\ProductDataController');
-Route::get('/shop_menus2/{id}', 'App\Http\Controllers\ProductDataController@getShopMenu2');
+Route::get('/shop_menus2/{id}', 'App\Http\Controllers\ProductDataController@getShopMenu2')->where('id', '[0-9]+');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
