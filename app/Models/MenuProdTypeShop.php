@@ -15,6 +15,4 @@ class MenuProdTypeShop extends Model
     {
         return $this->hasMany(MenuProdClassShop::class,'shop_menu1_index','shop_menu1_id');
     }
-
-    
 }
