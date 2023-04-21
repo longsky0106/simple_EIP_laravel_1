@@ -95,7 +95,7 @@ class ProductDataController extends Controller
             if($shopMenus2->count() > 0){
                 $shopMenus2 = json_decode($shopMenus2, true);
                 $shopMenus2 = $shopMenus2[0]['menu_prod_class_shop'];
-                return view('ProductDataManage.select-shopMenus2', compact('shopMenus2'));                
+                return view('ProductDataManage.select-shopMenus2', compact('shopMenus2'));
             }
 
     }
