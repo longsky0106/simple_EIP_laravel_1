@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuSpecItemUniversal2 extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    protected $connection = 'sqlsrv';
+    protected $table = 'Menu_Spec_Item_Universal_2';
+    protected $primaryKey = 'spec_item_id';
+    protected $fillable =   [
+        'spec_item_name',
+        'spec_item_name_en',
+        'spec_item_name_form',
+        'spec_item_ren'
+    ];
 }
