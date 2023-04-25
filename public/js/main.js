@@ -35,18 +35,18 @@
 
 		if(shop_menu2_id != 0){
 			// 送出AJAX資料到後端來取得規格項目
-			$.post(root_path + "../system/get_spec_item_from_menu.php", {
-				shop_menu2_id: shop_menu2_id,
-					SK_NO: SK_NO
-					, check_pct_sql_temp: bUseTempSql
-			}, function(result){
-				$("#spec_edit").html(result);
+			axios.get('/MenuSpecItems/' + shop_menu2_id )
+			.then(function (response) {
+				let data = response.data;
+				$("#spec_edit").html(data);
 				$("#spec_content_title").html("<span><b>規格<b style=\"color:blue;\"> ( " + SK_NO + " )</b></b></span>");
-				
-				if(typeof window_width_check === "function"){
-					window_width_check();
-				}
-				
+				console.log(data)
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+			.finally(function () {
+				console.log('finally');
 			});
 		}
 	});
