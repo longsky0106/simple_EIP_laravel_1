@@ -33,13 +33,13 @@
 		<div id="search_bar_L" class="flex items-center">
 
 			<form class="flex" action="{{ url()->current() }}" method="GET">
-				<input type="text" name="search_text" value="{{ $search_text }}" class="p-[0.2em]" placeholder="請輸入產品型號">
+				<input type="text" name="search_text" value="{{ $search_text }}" class="p-[0.2em] input input-sm input-bordered border-black" placeholder="請輸入產品型號">
 				<button type="submit" class="bg-cyan-900 hover:bg-cyan-700 text-white pl-2 pr-2 pt-1 pb-1 mr-2 rounded">搜尋</button>
 			</form>
 
 			 每頁顯示數量
 			  <form action="{{ url()->current() }}" method="GET">
-				<select class="pt-[0.2em] pb-[0.2em] pl-[0.5em] pr-[2.15rem] hover:bg-slate-200" name="per_page" onchange="this.form.submit()">
+				<select class="border border-black pt-[0.2em] pb-[0.2em] pl-[0.5em] pr-[2.15rem] hover:bg-slate-200" name="per_page" onchange="this.form.submit()">
 					<!-- 如果GET url的per_page為10然後 => $perPage，就將選定該述職的選項 -->
 					<option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
 					<option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>

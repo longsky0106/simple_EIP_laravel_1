@@ -39,15 +39,15 @@
 			<div id="show_data">
 			
 				<span><b>基本資料</b></span><br>
-					料號1(主要)<input type="text" id="" name="SK_NO1" value=""><br>
-					料號2(次要)<input type="text" id="" name="SK_NO2" value=""><br>
-					料號3(備用)<input type="text" id="" name="SK_NO3" value=""><br>
-					料號4(臨時)<input type="text" id="" name="SK_NO4" value="">
+					料號1(主要)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO1" value=""><br>
+					料號2(次要)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO2" value=""><br>
+					料號3(備用)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO3" value=""><br>
+					料號4(臨時)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO4" value="">
 					<input type="button" id="SK_NO_TEMP_add_btn" class="bg-slate-100 border-l border-b border-r border-black hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" value="新增" onClick="">
 					<br>
-					售價&emsp;&emsp;<input type="text" id="" name="Price" value=""><br>
-					建議售價<input type="text" id="" name="Suggested_Price" value=""><br>
-					成本&emsp;&emsp;<input type="text" id="" name="Cost_Price" value=""><br>
+					售價&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Price" value=""><br>
+					建議售價<input class="input input-sm input-bordered" type="text" id="" name="Suggested_Price" value=""><br>
+					成本&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Cost_Price" value=""><br>
 					<br>
 			
 
@@ -58,13 +58,13 @@
 			<span><b>產品分類</b></span><br>
 			<div id="prod_data">
 				目前產品分類: <br>
-				修改產品分類: <select id="categories" name="categories">
+				修改產品分類: <select class="select select-bordered select-sm max-w-xs" id="categories" name="categories">
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
 										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
 									@endforeach
 								</select>
-								<select id="ProdType" name="ProdType">
+								<select class="select select-bordered select-sm max-w-xs" id="ProdType" name="ProdType">
 									<option value="0">選擇產品類別</option>
 								</select><br />
 			</div>
@@ -108,25 +108,25 @@
 						<div id="zh-tw_spec" class="spec_input_aren">
 							<div class="spec_input_title">中文</div>				
 							<label for="spec_item_name">型號</label>
-							<input type="text" id="" name="spec_item_value[]" value=""><br>				
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
 							<label for="spec_item_name">功能</label>
-							<input type="text" id="" name="spec_item_value[]" value=""><br>				
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
 							<label for="spec_item_name">輸入埠</label>
-							<input type="text" id="" name="spec_item_value[]" value=""><br>				
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
 							<label for="spec_item_name">輸出埠</label>
-							<input type="text" id="" name="spec_item_value[]" value=""><br>
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>
 						</div>
 						
 						<div id="en-us_spec" class="spec_input_aren">
 							<div class="spec_input_title">英文</div>					
 							<label for="spec_item_name">Model</label>
-							<input type="text" id="" name="spec_item_value_en[]" value=""><br>										
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
 							<label for="spec_item_name">Founction</label>
-							<input type="text" id="" name="spec_item_value_en[]" value=""><br>										
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
 							<label for="spec_item_name">Input</label>
-							<input type="text" id="" name="spec_item_value_en[]" value=""><br>										
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
 							<label for="spec_item_name">Output</label>
-							<input type="text" id="" name="spec_item_value_en[]" value=""><br>
+							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>
 						</div>
 					</div>
 				<!-- <input type="button" value="新增項目" onclick=";"><br> -->
