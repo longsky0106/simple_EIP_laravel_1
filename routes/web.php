@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::resource('ProductDataManage', 'App\Http\Controllers\ProductDataController');
 Route::get('/shop_menus2/{id}', 'App\Http\Controllers\ProductDataController@getShopMenu2')->where('id', '[0-9]+');
 Route::get('/MenuSpecItems/{id}', 'App\Http\Controllers\MenuSpecItemController@index')->where('id', '[0-9]+');
-
+Route::get('/prod_base_search/{id}', 'App\Http\Controllers\ProductDataController@show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
