@@ -1,5 +1,36 @@
 ﻿$(document).ready(function(){
-	
+	// 檢查該型號的基本資料(對照)是否已存在 PCT.dbo.Data_Prod_Reference
+	function search_base_data(Model){
+
+		axios.get('/prod_base_search/' + Model )
+		.then(function (response) {
+			let data = response.data;
+			if(data.length){
+				$("#check_Model").html(Model + '已經存在，無法重複建立！');
+				console.log(data)
+			}
+			else
+			{
+				$("#check_Model").empty();
+			}
+			// $("#ProdType").html(data);
+			
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+		.finally(function () {
+			console.log('finally');
+		});
+	}
+
+	if($("#SK_create").length){
+		$("#SK_create").focusout(function(){
+			var Model = $("#SK_create").val();
+			search_base_data(Model);
+		});
+	}
+
 	/* 產品分類一 下拉選單異動 */
 	$(document).on('change', '#categories', function(event){
 		if(event.isDefaultPrevented()) return; // 防止重複關聯事件
@@ -10,7 +41,7 @@
 		.then(function (response) {
 			let data = response.data;
 			$("#ProdType").html(data);
-			console.log(data)
+			// console.log(data)
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -26,7 +57,7 @@
 	$(document).on('change', '#ProdType', function(event){
 		if(event.isDefaultPrevented()) return; // 防止重複關聯事件
 		event.preventDefault(); // 防止重複關聯事件
-		
+		// alert("ProdType change");
 		// 取得規格索引值
 		shop_menu2_id = $('#ProdType :selected').val();
 	   
@@ -40,7 +71,7 @@
 				let data = response.data;
 				$("#spec_edit").html(data);
 				$("#spec_content_title").html("<span><b>規格<b style=\"color:blue;\"> ( " + SK_NO + " )</b></b></span>");
-				console.log(data)
+				// console.log(data)
 			})
 			.catch(function (error) {
 				console.log(error);
