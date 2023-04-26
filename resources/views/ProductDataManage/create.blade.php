@@ -32,7 +32,8 @@
 		<div style="margin:0 0 0.8em 0"><span style="color:blue;font-size:26px;"><b>銘鵬規格小幫手Web-資料新增</b></span></div>
 		<form action="{{ route('ProductDataManage.store') }}" method="post">
 			<label style="font-size:1.2em;color:red;font-weight:bold;">型號
-				<input type="Text" id="SK_create" name="create_Model" placeholder="請輸入要新增的型號" style="margin:0 1em;height: 1.2em;width: fit-content;" autocomplete="off">
+				<input class="input input-sm input-bordered text-blue-800" type="Text" id="SK_create" name="create_Model" placeholder="請輸入要新增的型號" autocomplete="off">
+				<label id="check_Model"></label>
 			</label>
 		
 			@csrf
@@ -54,22 +55,21 @@
 			</div>
 
 			<br>
-			<hr>
+			<hr class="border-black mt-1 mb-1">
 			<span><b>產品分類</b></span><br>
 			<div id="prod_data">
-				目前產品分類: <br>
-				修改產品分類: <select class="select select-bordered select-sm max-w-xs" id="categories" name="categories">
+				設定產品分類: <select class="select select-bordered select-sm max-w-xs" id="categories" name="categories" autocomplete="off">
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
 										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
 									@endforeach
 								</select>
-								<select class="select select-bordered select-sm max-w-xs" id="ProdType" name="ProdType">
+								<select class="select select-bordered select-sm max-w-xs" id="ProdType" name="ProdType" autocomplete="off">
 									<option value="0">選擇產品類別</option>
 								</select><br />
 			</div>
 
-			<hr>
+			<hr class="border-black mt-1 mb-1">
 			<div id="spec_content_title">
 				<span><b>規格(請先設定產品分類才能顯示完整規格列表)</b></span>
 			</div>
@@ -134,28 +134,28 @@
 				<!-- &emsp;<input type="button" value="新增一筆新項目到現有產品分類下" onclick=";"> -->
 			</div>
 				</br>
-				<hr>
+				<hr class="border-black mt-1 mb-1">
 				<span><b>產品描述&特色</b></span><br>
 				<div id="description_features_edit">
 					<div id="description_input_content">
-						<div id="zh-tw_description" class="description_input_aren">
-							<div class="description_input_title">描述</div>
-							<div id="description_input_right" class="text_input_aren">
+						<div id="zh-tw_description" class="description_input_aren flex max-w-5xl border border-black">
+							<div class="description_input_title w-16 flex items-center border border-black justify-center">描述</div>
+							<div id="description_input_right" class="text_input_aren flex flex-col w-full max-w-[calc(100%-4rem)]">
 									<label for="description">中文</label>
-									<textarea rows="8" cols="20" name="zh-tw_description" autocomplete="off"></textarea>
+									<textarea class="textarea textarea-bordered min-w-[200px] min-h-[150px] max-w-full max-h-[300px] w-auto resize" rows="8" cols="20" name="zh-tw_description" autocomplete="off"></textarea>
 									<hr>
 									<label for="description_en">英文</label>
-									<textarea rows="8" cols="20" name="en-us_description" autocomplete="off"></textarea>
+									<textarea class="textarea textarea-bordered min-w-[200px] min-h-[150px] max-w-full max-h-[300px] w-auto resize" rows="8" cols="20" name="en-us_description" autocomplete="off"></textarea>
 							</div>
 						</div>		
-						<div id="zh-tw_features" class="features_input_aren">
-							<div class="features_input_title">特色</div>
-							<div id="features_input_right" class="text_input_aren">
+						<div id="zh-tw_features" class="features_input_aren flex max-w-5xl border border-black">
+							<div class="features_input_title w-16 flex items-center border border-black justify-center">特色</div>
+							<div id="features_input_right" class="text_input_aren flex flex-col w-full max-w-[calc(100%-4rem)]">
 									<label for="features">中文</label>
-									<textarea rows="8" cols="20" name="zh-tw_features" autocomplete="off"></textarea>
+									<textarea class="textarea textarea-bordered min-w-[200px] min-h-[150px] max-w-full max-h-[300px] w-auto resize" rows="8" cols="20" name="zh-tw_features" autocomplete="off"></textarea>
 									<hr>
 									<label for="features_en">英文</label>
-									<textarea rows="8" cols="20" name="en-us_features" autocomplete="off"></textarea>
+									<textarea class="textarea textarea-bordered min-w-[200px] min-h-[150px] max-w-full max-h-[300px] w-auto resize" rows="8" cols="20" name="en-us_features" autocomplete="off"></textarea>
 							</div>
 					</div>
 					<input type="button" id="button_update_data" value="更新/儲存  規格描述資料" onClick="update_submit('');">
