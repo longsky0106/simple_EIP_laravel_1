@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DataProdReferenceModel;
 use App\Models\MenuProdTypeShop;
-use App\Models\MenuProdClassShop;
 use Illuminate\Http\Request;
 
 class ProductDataController extends Controller
@@ -89,7 +88,8 @@ class ProductDataController extends Controller
         return view('ProductDataManage.create', compact('shopMenus1'));
     }
 
-    public function getShopMenu2($id)
+    
+    public function getShopMenu2($id) // 之後要改到MenuProdTypeShop控制器下...
     {
             $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $id)->get();
             if($shopMenus2->count() > 0){
@@ -109,7 +109,19 @@ class ProductDataController extends Controller
     public function store(Request $request)
     {
         $input = $request->input();
-        dd(($input));
+        $new_Model = $input['create_Model'];
+
+        if(empty($new_Model)){
+            return "Model不可為空！";
+        }
+
+        $check_model_extis = $this->show($new_Model)->count();
+
+        if ($check_model_extis) {
+            return $new_Model."已經存在，無法重複建立！";
+        }
+        
+        dd($input);
 
     }
 
@@ -121,7 +133,8 @@ class ProductDataController extends Controller
      */
     public function show($id)
     {
-        //
+        $Model = DataProdReferenceModel::select('Model')->where('Model', $id)->get();
+        return $Model;
     }
 
     /**
