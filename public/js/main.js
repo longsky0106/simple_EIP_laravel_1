@@ -7,13 +7,11 @@
 			let data = response.data;
 			if(data.length){
 				$("#check_Model").html(Model + '已經存在，無法重複建立！');
-				console.log(data)
 			}
 			else
 			{
 				$("#check_Model").empty();
 			}
-			// $("#ProdType").html(data);
 			
 		})
 		.catch(function (error) {
