@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\MenuProdClass;
 use App\Models\MenuSpecItemUniversal1;
 use App\Models\MenuSpecItemUniversal2;
-use App\Models\TypeClassItemPivot;
 
 class MenuSpecItemController extends Controller
 {
@@ -55,7 +54,7 @@ class MenuSpecItemController extends Controller
         
         
         
-    $MenuSpecItemAll = collect();
+    // $MenuSpecItemAll = collect();
         
         $MenuSpecItemsUni1 = MenuSpecItemUniversal1::all();
         $MenuSpecItemsUni2 = MenuSpecItemUniversal2::all();
