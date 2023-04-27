@@ -43,8 +43,12 @@
 					料號1(主要)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO1" value=""><br>
 					料號2(次要)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO2" value=""><br>
 					料號3(備用)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO3" value=""><br>
-					料號4(臨時)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO4" value="">
-					<input type="button" id="SK_NO_TEMP_add_btn" class="bg-slate-100 border-l border-b border-r border-black hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" value="新增" onClick="">
+					料號4(臨時)<input class="input input-sm input-bordered" type="text" id="" name="SK_NO4" 
+						placeholder="請直接按右側新增按鈕" value="">
+					<input type="button" id="SK_NO_TEMP_add_btn" 
+						class="btn btn-sm text-black bg-slate-100 border-l border-b border-r border-black
+								 hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" 
+						value="新增" onClick="">
 					<br>
 					售價&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Price" value=""><br>
 					建議售價<input class="input input-sm input-bordered" type="text" id="" name="Suggested_Price" value=""><br>
@@ -58,13 +62,13 @@
 			<hr class="border-black mt-1 mb-1">
 			<span><b>產品分類</b></span><br>
 			<div id="prod_data">
-				設定產品分類: <select class="select select-bordered select-sm max-w-xs" id="categories" name="categories" autocomplete="off">
+				設定產品分類: <select class="select select-bordered select-sm max-w-xs pt-0 pb-0" id="categories" name="categories" autocomplete="off">
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
 										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
 									@endforeach
 								</select>
-								<select class="select select-bordered select-sm max-w-xs" id="ProdType" name="ProdType" autocomplete="off">
+								<select class="select select-bordered select-sm max-w-xs pt-0 pb-0" id="ProdType" name="ProdType" autocomplete="off">
 									<option value="0">選擇產品類別</option>
 								</select><br />
 			</div>
@@ -74,8 +78,7 @@
 				<span><b>規格(請先設定產品分類才能顯示完整規格列表)</b></span>
 			</div>
 			
-			<div id="spec_edit">
-
+			<div id="spec_edit" class="max-w-5xl">
 					擴充座輸出介面:
 					<div id="spec_port">
 						<div>
