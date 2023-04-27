@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MenuProdClass;
+use App\Models\MenuProdClassShop;
 use App\Models\MenuSpecItemUniversal1;
 use App\Models\MenuSpecItemUniversal2;
 
@@ -18,7 +19,15 @@ class MenuSpecItemController extends Controller
     { 
         $MenuSpecItemsUni1 = MenuSpecItemUniversal1::all();
         $MenuSpecItemsUni2 = MenuSpecItemUniversal2::all();
-        $MenuSpecItems = MenuProdClass::with('MenuSpecItems')->where('prod_class_id', $id)->get()
+
+        if($id!=0){
+            $prod_class_id = MenuProdClassShop::with('MenuProdClass')->where('shop_menu2_id', $id)
+                                                ->first()->spec_menu_class_index;
+        }else{
+            $prod_class_id = 0;
+        }
+        
+        $MenuSpecItems = MenuProdClass::with('MenuSpecItems')->where('prod_class_id', $prod_class_id)->get()
                                         ->pluck('MenuSpecItems') // 取得MenuSpecItems子集合
                                         ->flatten();
         $MenuSpecItemAll = $MenuSpecItemsUni1->concat($MenuSpecItems)
