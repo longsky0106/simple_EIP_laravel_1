@@ -35,6 +35,11 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
-    plugins: [require("daisyui")],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('daisyui-tailwind-scrollbar'),
+        require("daisyui"),
+        
+    ],
+
 };
