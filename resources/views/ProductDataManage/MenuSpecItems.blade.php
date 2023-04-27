@@ -4,8 +4,9 @@
 <div id="spec_input_content" class="flex flex-wrap w-full">
 			
 	<div id="zh-tw_spec" class="flex-1">
-		<div class="spec_input_title w-full text-center">中文</div>
-			
+        <div class="spec_input_title flex w-full">
+            <div id="title_tw" class="flex-1 text-center">中文</div><div id="title_example" class="hidden sm:block w-24">帶入範例</div>
+        </div>	
         <div class="flex w-full p-1">
 			<label class="flex items-center w-24" for="spec_item_name">銷售品名</label>
 			<input class="flex-1 input input-sm sm:input-md input-bordered" type="text" id="" name="name_for_sell_tw" value="">
