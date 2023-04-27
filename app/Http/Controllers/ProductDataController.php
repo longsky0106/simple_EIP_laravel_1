@@ -80,12 +80,19 @@ class ProductDataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {      
+    {   
+        //view('ProductDataManage.MenuSpecItems', compact('MenuSpecItems'))   
+        $MenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->index(0);
+
+//    dd($MenuSpecItems);
+
+        $MenuSpecItemsDefault = $MenuSpecItems;
+        
         $shopMenus1 = MenuProdTypeShop::select('shop_menu1_id',
                                                 'shop_menu1_name',
                                                 'shop_menu1_rem')
                                         ->get();
-        return view('ProductDataManage.create', compact('shopMenus1'));
+        return view('ProductDataManage.create', compact('shopMenus1', 'MenuSpecItemsDefault'));
     }
 
     
