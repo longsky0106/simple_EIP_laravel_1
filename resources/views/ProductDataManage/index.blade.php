@@ -174,6 +174,7 @@
 								</div>
 							</div>
 							<div class="min-w-[14em] h-full flex-[50] overflow-x-auto
+									scrollbar scrollbar-thumb-rose-900 hover:hover:scrollbar-thumb-rose-700 scrollbar-track-rose-100
 										border-[1px] border-[#D4AEAE]">
 								<div class="hidden" >品名</div>
 								<div class="w-max inline-block relative" >
