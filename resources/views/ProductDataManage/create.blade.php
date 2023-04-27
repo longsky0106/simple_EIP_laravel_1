@@ -79,62 +79,7 @@
 			</div>
 			
 			<div id="spec_edit" class="max-w-5xl">
-					擴充座輸出介面:
-					<div id="spec_port">
-						<div>
-							<input id="port_HDMI" title="HDMI" class="checkbox_spec_port" type="checkbox" autocomplete="off">
-							<label for="port_HDMI">
-								HDMI
-							</label>
-						</div>
-						<div>
-							<input id="port_DisplayPort" class="checkbox_spec_port" type="checkbox" autocomplete="off">
-							<label for="port_DisplayPort">
-								DisplayPort
-							</label>
-						</div>
-						<div>
-							<input id="port_DVI" class="checkbox_spec_port" type="checkbox" autocomplete="off">
-							<label for="port_DVI">
-								DVI
-							</label>
-						</div>
-						<div>
-							<input id="port_VGA" class="checkbox_spec_port" type="checkbox" autocomplete="off">
-							<label for="port_VGA">
-								VGA
-							</label>
-						</div>
-					</div>
-					<div id="spec_input_content">
-					
-						<div id="zh-tw_spec" class="spec_input_aren">
-							<div class="spec_input_title">中文</div>				
-							<label for="spec_item_name">型號</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
-							<label for="spec_item_name">功能</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
-							<label for="spec_item_name">輸入埠</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>				
-							<label for="spec_item_name">輸出埠</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value[]" value=""><br>
-						</div>
-						
-						<div id="en-us_spec" class="spec_input_aren">
-							<div class="spec_input_title">英文</div>					
-							<label for="spec_item_name">Model</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
-							<label for="spec_item_name">Founction</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
-							<label for="spec_item_name">Input</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>										
-							<label for="spec_item_name">Output</label>
-							<input class="input input-sm input-bordered" type="text" id="" name="spec_item_value_en[]" value=""><br>
-						</div>
-					</div>
-				<!-- <input type="button" value="新增項目" onclick=";"><br> -->
-				<!-- &emsp;<input type="button" value="新增已存在項目到現有產品分類下" onclick=";"><br> -->
-				<!-- &emsp;<input type="button" value="新增一筆新項目到現有產品分類下" onclick=";"> -->
+				{!!$MenuSpecItemsDefault!!}
 			</div>
 				</br>
 				<hr class="border-black mt-1 mb-1">
