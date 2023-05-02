@@ -79,7 +79,7 @@
 			</div>
 			
 			<div id="spec_edit" class="max-w-5xl">
-				{!!$MenuSpecItemsDefault!!}
+				{!!$DefaultMenuSpecItems!!}
 			</div>
 				</br>
 				<hr class="border-black mt-1 mb-1">
