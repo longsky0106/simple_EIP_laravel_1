@@ -81,22 +81,18 @@ class ProductDataController extends Controller
      */
     public function create()
     {   
-        //view('ProductDataManage.MenuSpecItems', compact('MenuSpecItems'))   
-        $MenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->index(0);
 
-//    dd($MenuSpecItems);
-
-        $MenuSpecItemsDefault = $MenuSpecItems;
+        $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->index(0);
         
         $shopMenus1 = MenuProdTypeShop::select('shop_menu1_id',
                                                 'shop_menu1_name',
                                                 'shop_menu1_rem')
                                         ->get();
-        return view('ProductDataManage.create', compact('shopMenus1', 'MenuSpecItemsDefault'));
+        return view('ProductDataManage.create', compact('shopMenus1', 'DefaultMenuSpecItems'));
     }
 
-    
-    public function getShopMenu2($id) // 之後要改到MenuProdTypeShop控制器下...
+    // 之後要改到MenuProdTypeShop控制器下...
+    public function getShopMenu2($id)
     {
             $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $id)->get();
             if($shopMenus2->count() > 0){
