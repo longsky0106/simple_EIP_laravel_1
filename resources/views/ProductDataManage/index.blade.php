@@ -143,7 +143,7 @@
 										border-[1px] border-[#D4AEAE]">
 								<div class="hidden" >選擇</div>
 								<div class="inline-block w-full h-full relative" 
-									id="list_no<?=$DataProdReference?>" >
+									id="list_no{{ $DataProdReference->ID }}" >
 									<input type="checkbox" name="Data_Prod_Ref_ID[]" value="{{ $DataProdReference->ID }}" autocomplete="off">
 								</div>
 							</div>
