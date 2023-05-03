@@ -81,3 +81,29 @@
 	});
 
 });
+
+function createTempSkno(){
+	var Model = $("#SK_create").val();
+	if(!Model){
+		alert("請先輸入型號！");
+		return;
+	}
+	url = '/prod_base_search/' + Model;
+	axios.get('/prod_base_search/' + Model )
+	.then(function (response) {
+		let data = response.data;
+		if(data.length){
+			$("#checkTempSkno").html(Model + '已經存在，無法重複建立！');
+		}else{
+			$("#checkTempSkno").empty();
+			$("input[name=SK_NO4]").val(Model + "_temp");	
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
+	})
+	.finally(function () {
+		console.log('finally');
+	});
+
+}
