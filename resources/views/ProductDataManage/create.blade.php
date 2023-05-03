@@ -106,12 +106,11 @@
 									<textarea class="textarea textarea-bordered min-w-[200px] min-h-[150px] max-w-full max-h-[300px] w-auto resize" rows="8" cols="20" name="en-us_features" autocomplete="off"></textarea>
 							</div>
 					</div>
-					<input type="button" id="button_update_data" value="更新/儲存  規格描述資料" onClick="update_submit('');">
 					<button class="bg-slate-100 border-l border-b border-r
 								   border-black hover:bg-slate-200 pl-2 
 								   pr-2 pt-1 pb-1 mr-2 rounded" type="submit"
 					>
-						新增一筆資料
+						更新/儲存  規格描述資料
 					</button>
 				</div>
 		</form>
