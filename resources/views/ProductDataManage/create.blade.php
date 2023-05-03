@@ -48,7 +48,7 @@
 					<input type="button" id="SK_NO_TEMP_add_btn" 
 						class="btn btn-sm text-black bg-slate-100 border-l border-b border-r border-black
 								 hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" 
-						value="新增" onClick="">
+						value="新增" onClick="createTempSkno()"><label id="checkTempSkno"></label>
 					<br>
 					售價&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Price" value=""><br>
 					建議售價<input class="input input-sm input-bordered" type="text" id="" name="Suggested_Price" value=""><br>
