@@ -130,7 +130,10 @@
 				</div>
 
 				@foreach($DataProdsReference as $DataProdReference)
-					@php($count= $loop->index + 1)
+					@php
+						$count = $loop->index + 1;
+						$count = ($DataProdsReference->currentPage() - 1 )* $perPage + $count;
+					@endphp
 
 					<div class="flex flex-wrap h-16 mt-[0.2em] mb-[0.2em] leading-[1.25] font-[none]">
 						<div class="flex">
