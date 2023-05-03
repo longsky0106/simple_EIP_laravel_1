@@ -111,20 +111,52 @@ class ProductDataController extends Controller
      */
     public function store(Request $request)
     {
+        $error = 0;
         $input = $request->input();
         $new_Model = $input['create_Model'];
+        $SK_NO1 = $input['SK_NO1'];
+        $SK_NO2 = $input['SK_NO2'];
+        $SK_NO3 = $input['SK_NO3'];
+        $SK_NO4 = $input['SK_NO4'];
+        $categories = !empty($input['categories'])?($input['categories']):"0";
+        $ProdType = !empty($input['ProdType'])?($input['ProdType']):"0";
 
         if(empty($new_Model)){
-            return "Model不可為空！";
+            echo "Model不可為空！<br>";
+            $error++;
         }
 
         $check_model_extis = $this->show($new_Model)->count();
-
         if ($check_model_extis) {
-            return $new_Model."已經存在，無法重複建立！";
+            echo $new_Model."已經存在，無法重複建立！<br>";
+            $error++;
         }
         
-        dd($input);
+        if(empty($SK_NO1.$SK_NO2.$SK_NO3.$SK_NO4)){
+            echo "請至少填寫一個料號！<br>";
+            $error++;
+        }
+
+        if($categories+$ProdType==0){
+            echo "請設定產品分類！<br>";
+            $error++;
+        }
+
+        if($error>0){
+            return;
+        }else{
+            // 新增臨時料號...
+            echo "新增臨時料號...<br>";
+
+            // 建立基本資料(對照)與後續作業...
+            echo "建立基本資料(對照)與後續作業...<br>";
+
+            dd($input);
+        }
+
+
+
+        
 
     }
 
