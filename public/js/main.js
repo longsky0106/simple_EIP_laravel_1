@@ -12,13 +12,9 @@
 			{
 				$("#check_Model").empty();
 			}
-			
 		})
 		.catch(function (error) {
 			console.log(error);
-		})
-		.finally(function () {
-			console.log('finally');
 		});
 	}
 
@@ -43,12 +39,7 @@
 		})
 		.catch(function (error) {
 			console.log(error);
-		})
-		.finally(function () {
-			console.log('finally');
 		});
-		
-		
 	});
 
 	/* 產品分類二 下拉選單異動 */
@@ -73,9 +64,6 @@
 			})
 			.catch(function (error) {
 				console.log(error);
-			})
-			.finally(function () {
-				console.log('finally');
 			});
 		}
 	});
@@ -101,9 +89,5 @@ function createTempSkno(){
 	})
 	.catch(function (error) {
 		console.log(error);
-	})
-	.finally(function () {
-		console.log('finally');
 	});
-
 }
