@@ -15,6 +15,6 @@ return [
 
     'failed' => '這些憑據與我們的記錄不相符。',
     'password' => '提供的密碼不正確。',
-    'throttle' => '登錄嘗試次數過多。 請在 :seconds 秒後重試。',
+    'throttle' => '嘗試登入次數過多。 請在 :seconds 秒後重試。',
 
 ];
