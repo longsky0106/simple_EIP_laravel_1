@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MenuProdClass;
 use App\Models\MenuProdClassShop;
+use App\Models\MenuSpecItem;
 use App\Models\MenuSpecItemUniversal1;
 use App\Models\MenuSpecItemUniversal2;
 
@@ -36,6 +37,28 @@ class MenuSpecItemController extends Controller
         $MenuSpecItems = $MenuSpecItemAll;
 
         return view('ProductDataManage.MenuSpecItems', compact('MenuSpecItems'));
+    }
+
+    public function getSpecExample($spec_item_name, $spec_item_no, $spec_item_lang)
+    {
+
+        if($spec_item_lang == "both"){
+            $spec_item_example = MenuSpecItem::select(
+                                    'spec_item_example'.$spec_item_no.'_tw',
+                                    'spec_item_example'.$spec_item_no.'_en'
+                                )->where('spec_item_name_form', $spec_item_name)->first();
+            // echo $row['spec_item_example'.$spec_item_no.'_tw']."|".$row['spec_item_example'.$spec_item_no.'_en'];
+            return $spec_item_example['spec_item_example'.$spec_item_no.'_tw'].'|'.$spec_item_example['spec_item_example'.$spec_item_no.'_en'];
+        }else{
+            $spec_item_example = MenuSpecItem::select(
+                                    'spec_item_example'.$spec_item_no.'_'.$spec_item_lang
+                                )->where('spec_item_name_form', $spec_item_name)->first();
+            // echo $row['spec_item_example'.$spec_item_no.'_'.$spec_item_lang.''];
+            return $spec_item_example['spec_item_example'.$spec_item_no.'_'.$spec_item_lang];
+        }
+
+        // dd($spec_item_example['spec_item_example'.$spec_item_no.'_'.$spec_item_lang]);
+        
     }
 
     /**

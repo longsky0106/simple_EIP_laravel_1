@@ -73,10 +73,10 @@
 function createTempSkno(){
 	var Model = $("#SK_create").val();
 	if(!Model){
-		alert("請先輸入型號！");
+		// alert("請先輸入型號！");
+		$("#checkTempSkno").html("請先輸入型號！");
 		return;
 	}
-	url = '/prod_base_search/' + Model;
 	axios.get('/prod_base_search/' + Model )
 	.then(function (response) {
 		let data = response.data;
@@ -85,6 +85,41 @@ function createTempSkno(){
 		}else{
 			$("#checkTempSkno").empty();
 			$("input[name=SK_NO4]").val(Model + "_temp");	
+		}
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+}
+
+// 按下帶入範例按鈕
+function spec_example_add_input(spec_item,n,lang){
+	spec_item_name = spec_item.name;
+	// 送出AJAX資料到後端來取得規格數值範例
+	axios.get('/spec_item_example/' + spec_item_name + '/' + n + '/' + lang)
+	.then(function (response) {
+		let data = response.data;
+		data = $.trim(data);
+		if(data){
+			if(lang == 'both'){
+				spec_example_result = data.split('|');
+				spec_example_result_tw = spec_example_result[0];
+				spec_example_result_en = spec_example_result[1];
+				
+				if(spec_example_result_tw){
+					$("input[name='"+ spec_item_name +"']").val(spec_example_result_tw);
+				}
+				
+				if(spec_example_result_en){
+					$("input[name='"+ spec_item_name +"_en']").val(spec_example_result_en);
+				}
+			}else{
+				if(lang == 'tw'){
+					$("input[name='"+ spec_item_name +"']").val(data);
+				}else{
+					$("input[name='"+ spec_item_name +"_en']").val(data);
+				}
+			}
 		}
 	})
 	.catch(function (error) {
