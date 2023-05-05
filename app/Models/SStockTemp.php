@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class SStockTemp extends Model
 {
-    protected $connection = 'sqlsr';
+    protected $connection = 'sqlsrv';
     protected $table = 'SSTOCK_temp';
     protected $primaryKey = 'SK_NO';
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable =   [
         'SK_NO',
         'SK_NAME',
