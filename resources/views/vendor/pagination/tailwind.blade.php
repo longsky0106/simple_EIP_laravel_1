@@ -27,17 +27,18 @@
         <div class="flex flex-1 items-center justify-between sm:hidden">
             <div>
                 <p class="text-sm text-gray-700 leading-5">
-                    {!! __('Showing') !!}
+                    {!! __('在') !!}
+                    <span class="font-medium">{{ $paginator->total() }}</span>
+                    {!! __('個結果中，') !!}
+                    {!! __('顯示') !!}
                     @if ($paginator->firstItem())
                         <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                        {!! __('to') !!}
+                        {!! __('到') !!}
                         <span class="font-medium">{{ $paginator->lastItem() }}</span>
                     @else
                         {{ $paginator->count() }}
                     @endif
-                    {!! __('of') !!}
-                    <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
+                    
                 </p>
             </div>
 
