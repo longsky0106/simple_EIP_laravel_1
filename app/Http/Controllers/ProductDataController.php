@@ -145,8 +145,12 @@ class ProductDataController extends Controller
         if($error>0){
             return;
         }else{
-            // 新增臨時料號...
-            echo "新增臨時料號...<br>";
+            $check_temp_model_extis = app('App\Http\Controllers\SStockTempController')->show($SK_NO4)->count();
+            if($check_temp_model_extis){
+                echo $SK_NO4."已存在，跳過建立...<br>";
+            }else {
+                echo "新增臨時料號".$SK_NO4."...<br>";
+            }
 
             // 建立基本資料(對照)與後續作業...
             echo "建立基本資料(對照)與後續作業...<br>";

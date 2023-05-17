@@ -77,19 +77,7 @@ function createTempSkno(){
 		$("#checkTempSkno").html("請先輸入型號！");
 		return;
 	}
-	axios.get('/check_temp_skno/' + Model )
-	.then(function (response) {
-		let data = response.data;
-		if(data.length){
-			$("#checkTempSkno").html(Model + '_temp已經存在，無法重複建立！');
-		}else{
-			$("#checkTempSkno").empty();
-			$("input[name=SK_NO4]").val(Model + "_temp");	
-		}
-	})
-	.catch(function (error) {
-		console.log(error);
-	});
+	$("input[name=SK_NO4]").val(Model + "_temp");	
 }
 
 // 按下帶入範例按鈕
