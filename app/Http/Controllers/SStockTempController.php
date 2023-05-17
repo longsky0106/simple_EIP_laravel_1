@@ -46,7 +46,7 @@ class SStockTempController extends Controller
      */
     public function show($id)
     {
-        $tempModel = SStockTemp::select('SK_NO')->where('SK_NO', $id.'_temp')->get();
+        $tempModel = SStockTemp::select('SK_NO')->where('SK_NO', $id)->get();
         return $tempModel;
     }
 
