@@ -11,7 +11,7 @@
 	// 檢查該型號的基本資料(對照)是否已存在 PCT.dbo.Data_Prod_Reference
 	function search_base_data(Model){
 
-		axios.get(rootPath + '/prod_base_search/' + Model )
+		axios.get(url + '/prod_base_search/' + Model )
 		.then(function (response) {
 			let data = response.data;
 			if(data.length){
@@ -40,7 +40,7 @@
 		event.preventDefault(); // 防止重複關聯事件
 
 		shop_menu1_id = $('#categories :selected').val();
-		axios.get(rootPath + '/shop_menus2/' + shop_menu1_id )
+		axios.get(url + '/shop_menus2/' + shop_menu1_id )
 		.then(function (response) {
 			let data = response.data;
 			$("#ProdType").html(data);
@@ -64,7 +64,7 @@
 
 		if(shop_menu2_id != 0){
 			// 送出AJAX資料到後端來取得規格項目
-			axios.get(rootPath + '/MenuSpecItems/' + shop_menu2_id )
+			axios.get(url + '/MenuSpecItems/' + shop_menu2_id )
 			.then(function (response) {
 				let data = response.data;
 				$("#spec_edit").html(data);
@@ -91,9 +91,10 @@ function createTempSkno(){
 
 // 按下帶入範例按鈕
 function spec_example_add_input(spec_item,n,lang){
+	var url = $('meta[name="base_url"]').attr('content');
 	spec_item_name = spec_item.name;
 	// 送出AJAX資料到後端來取得規格數值範例
-	axios.get(rootPath + '/spec_item_example/' + spec_item_name + '/' + n + '/' + lang)
+	axios.get(url + '/spec_item_example/' + spec_item_name + '/' + n + '/' + lang)
 	.then(function (response) {
 		let data = response.data;
 		data = $.trim(data);
