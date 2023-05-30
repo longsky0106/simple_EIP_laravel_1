@@ -1,13 +1,8 @@
 ﻿$(document).ready(function(){
-	root_path = window.location.pathname;
-	root_path = root_path.indexOf("php");
-	alert(root_path);
-	if(root_path){
-		alert("false");
-	}else{
-		root_path = "";
-		alert("true");
-	}
+
+	var url = $('meta[name="base_url"]').attr('content');
+
+	// alert(url);
 
 
 
@@ -43,7 +38,7 @@
 		event.preventDefault(); // 防止重複關聯事件
 
 		shop_menu1_id = $('#categories :selected').val();
-		axios.get('/shop_menus2/' + shop_menu1_id )
+		axios.get(url+'/shop_menus2/' + shop_menu1_id )
 		.then(function (response) {
 			let data = response.data;
 			$("#ProdType").html(data);
@@ -67,7 +62,7 @@
 
 		if(shop_menu2_id != 0){
 			// 送出AJAX資料到後端來取得規格項目
-			axios.get('/MenuSpecItems/' + shop_menu2_id )
+			axios.get(url+'/MenuSpecItems/' + shop_menu2_id )
 			.then(function (response) {
 				let data = response.data;
 				$("#spec_edit").html(data);

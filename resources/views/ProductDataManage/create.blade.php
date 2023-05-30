@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="base_url" content="{{ URL::to('/') }}">
         
         <title>簡易EIP Laravel版</title>
 
