@@ -11,6 +11,7 @@ class SStockTemp extends Model
     protected $primaryKey = 'SK_NO';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
     protected $fillable =   [
         'SK_NO',
         'SK_NAME',
