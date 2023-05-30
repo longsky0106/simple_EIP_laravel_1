@@ -5,7 +5,7 @@
 
     RewriteEngine On
     RewriteBase /
-    # RewriteBase /simple_EIP_laravel_1/
+    RewriteBase /simple_EIP_laravel_1/
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

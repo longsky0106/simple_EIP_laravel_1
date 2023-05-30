@@ -1,4 +1,16 @@
 ﻿$(document).ready(function(){
+	root_path = window.location.pathname;
+	root_path = root_path.indexOf("php");
+	alert(root_path);
+	if(root_path){
+		alert("false");
+	}else{
+		root_path = "";
+		alert("true");
+	}
+
+
+
 	// 檢查該型號的基本資料(對照)是否已存在 PCT.dbo.Data_Prod_Reference
 	function search_base_data(Model){
 
