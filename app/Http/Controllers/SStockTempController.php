@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SStockTemp;
+use GuzzleHttp\Promise\Create;
 
 class SStockTempController extends Controller
 {
@@ -35,7 +36,21 @@ class SStockTempController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        $SK_NO4 = $input['SK_NO4'];
+
+        $SStockTemp = new SStockTemp();
+        $check_temp_model_extis = $this->show($SK_NO4)->count();
+        // 如果沒有建立料號
+        if($check_temp_model_extis){
+            $SStockTemp->SK_NO = $SK_NO4;
+        }
+        
+
+        // 否則只存其他欄位
+
+        $SStockTemp->save();
+
     }
 
     /**
