@@ -1,12 +1,6 @@
 ﻿$(document).ready(function(){
 
 	var url = $('meta[name="base_url"]').attr('content');
-	var rootPath = url.split("/")[3];
-	if (typeof(rootPath) === 'undefined') {
-		rootPath = '';
-	}
-
-	// alert(rootPath);
 
 	// 檢查該型號的基本資料(對照)是否已存在 PCT.dbo.Data_Prod_Reference
 	function search_base_data(Model){
