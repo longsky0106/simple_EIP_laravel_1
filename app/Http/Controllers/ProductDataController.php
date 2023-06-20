@@ -145,22 +145,38 @@ class ProductDataController extends Controller
         if($error>0){
             return;
         }else{
-            
+            $SK_NO1 = empty($SK_NO1)?'':$SK_NO1;
+            $SK_NO2 = empty($SK_NO2)?'':$SK_NO2;
+            $SK_NO3 = empty($SK_NO3)?'':$SK_NO3;
+            $SK_NO4 = empty($SK_NO4)?'':$SK_NO4;
 
-/*             $check_temp_model_extis = app('App\Http\Controllers\SStockTempController')->show($SK_NO4)->count();
-            if($check_temp_model_extis){
-                echo $SK_NO4."已存在，跳過建立...<br>";
-            }else {
-                echo "新增臨時料號".$SK_NO4."...<br>";
-                
-            } */
+            echo "寫入資料到temp_model...<br>";
+            $DataProdReference = 
+            DataProdReferenceModel::create(array_merge($input,
+                                                        [
+                                                            'Model' => $new_Model,
+                                                            'SK_NO1' => $SK_NO1,
+                                                            'SK_NO2' => $SK_NO2,
+                                                            'SK_NO3' => $SK_NO3,
+                                                            'SK_NO4' => $SK_NO4
+                                                        ]));
 
-        echo "寫入資料到temp_model...<br>";    
-        app('App\Http\Controllers\SStockTempController')->store($request);
+            if(isset($DataProdReference)){
+                echo "寫入資料成功<br>";
+                // dd($DataProdReference);
+            }else{
+                echo "寫入資料失敗<br>";
+                // dd($DataProdReference);
+            }
+
+
+            // 建立臨時料號
+            app('App\Http\Controllers\SStockTempController')->store($request);
+
             // 建立基本資料(對照)與後續作業...
             echo "建立基本資料(對照)與後續作業...<br>";
 
-            dd($input);
+            // dd($input);
         }
 
 
