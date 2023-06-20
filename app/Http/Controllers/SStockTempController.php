@@ -42,14 +42,17 @@ class SStockTempController extends Controller
         $SStockTemp = new SStockTemp();
         $check_temp_model_extis = $this->show($SK_NO4)->count();
         // 如果沒有建立料號
-        if($check_temp_model_extis){
+        if(!$check_temp_model_extis){
             $SStockTemp->SK_NO = $SK_NO4;
+            $SStockTemp->save();
+        }else{
+            echo "臨時料號已存在，無法重複建立...<br>";
         }
         
 
         // 否則只存其他欄位
 
-        $SStockTemp->save();
+        
 
     }
 
