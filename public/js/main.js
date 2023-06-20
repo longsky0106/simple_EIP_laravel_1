@@ -38,6 +38,7 @@
 		.then(function (response) {
 			let data = response.data;
 			$("#ProdType").html(data);
+			$("#categories_text").val($("#categories :selected").text());
 			// console.log(data)
 		})
 		.catch(function (error) {
@@ -52,6 +53,7 @@
 		// alert("ProdType change");
 		// 取得規格索引值
 		shop_menu2_id = $('#ProdType :selected').val();
+		$("#ProdType_text").val($("#ProdType :selected").text());
 	   
 		// 取得目前上方查詢結果的料號
 		var SK_NO = $("#sk_no1").text();

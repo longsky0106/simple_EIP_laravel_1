@@ -73,9 +73,12 @@
 										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
 									@endforeach
 								</select>
+								<input type="hidden" name="categories_text" id="categories_text" value="" />
 								<select class="select select-bordered select-sm max-w-xs pt-0 pb-0" id="ProdType" name="ProdType" autocomplete="off">
 									<option value="0">選擇產品類別</option>
-								</select><br />
+								</select>
+								<input type="hidden" name="ProdType_text" id="ProdType_text" value="" />
+								<br />
 			</div>
 
 			<hr class="border-black mt-1 mb-1">
