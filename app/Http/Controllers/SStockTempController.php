@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SStockTemp;
 use GuzzleHttp\Promise\Create;
+use Throwable;
 
 class SStockTempController extends Controller
 {
@@ -23,9 +24,33 @@ class SStockTempController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $input = $request->input();
+        $SK_NO4 = $input['SK_NO4'];
+
+        $SStockTemp = new SStockTemp();
+        $check_temp_model_extis = $this->show($SK_NO4)->count();
+        // 如果沒有建立料號
+        if(!$check_temp_model_extis){
+
+            $SStockTemp = SStockTemp::create(array_merge($input,
+                                                        [
+                                                            'SK_NO' => $SK_NO4
+                                                        ]));
+                                            
+            if(isset($SStockTemp)){
+                echo "建立料號成功<br>";
+                // dd($DataProdReference);
+            }else{
+                echo "建立料號失敗<br>";
+                // dd($DataProdReference);
+            }
+        }else{
+            echo "臨時料號已存在...<br>";
+        }
+        // "寫入資料到現有臨時料號...<br>";
+        $this->update($request, $SK_NO4);
     }
 
     /**
@@ -36,24 +61,7 @@ class SStockTempController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->input();
-        $SK_NO4 = $input['SK_NO4'];
-
-        $SStockTemp = new SStockTemp();
-        $check_temp_model_extis = $this->show($SK_NO4)->count();
-        // 如果沒有建立料號
-        if(!$check_temp_model_extis){
-            $SStockTemp->SK_NO = $SK_NO4;
-            $SStockTemp->save();
-        }else{
-            echo "臨時料號已存在，無法重複建立...<br>";
-        }
-        
-
-        // 否則只存其他欄位
-
-        
-
+        //
     }
 
     /**
@@ -88,7 +96,33 @@ class SStockTempController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->input();
+        $SK_SPEC = '';
+
+        $SK_ESPES = '';
+
+        $SK_SMNETS = $input['zh-tw_description']
+                    .(($input['zh-tw_description'] == "")?"":"\r\n")."---Features---\r\n"
+                    .$input['zh-tw_features']
+                    .(($input['zh-tw_features'] == "")?"":"\r\n")."---DESCRIPTION---\r\n"
+                    .$input['en-us_description']
+                    .(($input['en-us_description'] == "")?"":"\r\n")."---Features---\r\n"
+                    .$input['en-us_features'];
+
+        echo "寫入".$id."資料到現有臨時料號...<br>";
+        try {
+            $SStockTemp = SStockTemp::find($id)->update([
+                                                            'SK_SPEC' => $SK_SPEC,
+                                                            'SK_COLOR' => $input['Color'],
+                                                            'SK_USE' => $input['categories_text'],
+                                                            'SK_LOCATE' => $input['ProdType_text'],
+                                                            'SK_SESPES' => $input['name_for_sell_en'],
+                                                            'SK_ESPES' => $SK_ESPES,
+                                                            'SK_SMNETS' => $SK_SMNETS,
+                                                        ]);
+        } catch (Throwable $e) {
+            print "Error: ".$e->getMessage;
+        }
     }
 
     /**
