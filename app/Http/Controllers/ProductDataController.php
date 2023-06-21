@@ -160,7 +160,7 @@ class ProductDataController extends Controller
                                                             'SK_NO3' => $SK_NO3,
                                                             'SK_NO4' => $SK_NO4
                                                         ]));
-
+            // dd($DataProdReference);
             if(isset($DataProdReference)){
                 echo "寫入資料成功<br>";
                 // dd($DataProdReference);
@@ -171,7 +171,7 @@ class ProductDataController extends Controller
 
 
             // 建立臨時料號
-            app('App\Http\Controllers\SStockTempController')->store($request);
+            app('App\Http\Controllers\SStockTempController')->create($request);
 
             // 建立基本資料(對照)與後續作業...
             echo "建立基本資料(對照)與後續作業...<br>";
