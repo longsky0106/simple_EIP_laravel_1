@@ -97,17 +97,56 @@ class SStockTempController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->input();
-        $SK_SPEC = '';
+        $SK_SPEC_tw = '';
+        $SK_SPEC_en = '';
 
-        $SK_ESPES = '';
+        foreach($input as $key => $value){
+            if($value){
 
-        $SK_SMNETS = $input['zh-tw_description']
-                    .(($input['zh-tw_description'] == "")?"":"\r\n")."---Features---\r\n"
-                    .$input['zh-tw_features']
-                    .(($input['zh-tw_features'] == "")?"":"\r\n")."---DESCRIPTION---\r\n"
-                    .$input['en-us_description']
-                    .(($input['en-us_description'] == "")?"":"\r\n")."---Features---\r\n"
-                    .$input['en-us_features'];
+                // 中文規格
+                if(!strpos($key,'_en'))
+                {
+                    $SpecItemName = app('App\Http\Controllers\MenuSpecItemController')->getSpecItemName($key);
+                
+                    // 將中文規格每一行排成: 規格標題 全形空格 規格內容
+                    if($SpecItemName->count() > 0){
+                        $SpecItemName = $SpecItemName[0]['spec_item_name'];
+                        $SK_SPEC_tw .=  $SpecItemName."	".$value."\r\n";
+                    }
+                    
+                }
+                else if(strpos($key,'_en') && !str_starts_with($key,'SK_') && !str_starts_with($key,'name_for_sell'))
+                {
+                    // 將英文規格每一行排成: 規格標題 全形空格 規格內容
+                    $key = str_replace('_en','',$key);
+                    $key = str_replace('_',' ',$key);
+                    $key = str_replace('Max ','Max. ',$key);
+                    $SK_SPEC_en .= $key."	".$value."\r\n";
+                }
+
+            }
+
+        }
+        echo nl2br(str_replace('	','&emsp;',$SK_SPEC_tw))."<br>";
+        echo nl2br(str_replace('	','&emsp;',$SK_SPEC_en));
+        echo "<br>";
+
+        $SK_SPEC = $SK_SPEC_tw;
+        $SK_ESPES = $SK_SPEC_en;
+
+        if(!empty($input['zh-tw_description'].$input['zh-tw_features'].$input['en-us_description'].$input['en-us_features'])){
+            $SK_SMNETS = $input['zh-tw_description']
+                        .(($input['zh-tw_description'] == "")?"":"\r\n")."---Features---\r\n"
+                        .$input['zh-tw_features']
+                        .(($input['zh-tw_features'] == "")?"":"\r\n")."---DESCRIPTION---\r\n"
+                        .$input['en-us_description']
+                        .(($input['en-us_description'] == "")?"":"\r\n")."---Features---\r\n"
+                        .$input['en-us_features'];
+        }else{
+            $SK_SMNETS = '';
+        }
+        echo nl2br(str_replace('	','&emsp;',$SK_SMNETS))."<br>";
+
 
         echo "寫入".$id."資料到現有臨時料號...<br>";
         try {
