@@ -160,6 +160,7 @@ class SStockTempController extends Controller
                                                             'SK_ESPES' => $SK_ESPES,
                                                             'SK_SMNETS' => $SK_SMNETS,
                                                         ]);
+            echo $id."寫入規格資料完成<br>";
         } catch (Throwable $e) {
             print "Error: ".$e->getMessage;
         }
