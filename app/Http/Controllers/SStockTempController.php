@@ -131,8 +131,8 @@ class SStockTempController extends Controller
         echo nl2br(str_replace('	','&emsp;',$SK_SPEC_en));
         echo "<br>";
 
-        $SK_SPEC = $SK_SPEC_tw;
-        $SK_ESPES = $SK_SPEC_en;
+        $SK_SPEC = rtrim($SK_SPEC_tw);
+        $SK_ESPES = rtrim($SK_SPEC_en);
 
         if(!empty($input['zh-tw_description'].$input['zh-tw_features'].$input['en-us_description'].$input['en-us_features'])){
             $SK_SMNETS = $input['zh-tw_description']
