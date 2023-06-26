@@ -150,7 +150,8 @@ class ProductDataController extends Controller
             $SK_NO3 = empty($SK_NO3)?'':$SK_NO3;
             $SK_NO4 = empty($SK_NO4)?'':$SK_NO4;
 
-            echo "寫入資料到temp_model...<br>";
+            
+            echo "建立基本資料(對照)...<br>";
             $DataProdReference = 
             DataProdReferenceModel::create(array_merge($input,
                                                         [
@@ -160,21 +161,18 @@ class ProductDataController extends Controller
                                                             'SK_NO3' => $SK_NO3,
                                                             'SK_NO4' => $SK_NO4
                                                         ]));
-            // dd($DataProdReference);
+
             if(isset($DataProdReference)){
-                echo "寫入資料成功<br>";
-                // dd($DataProdReference);
+                echo "建立基本資料成功<br>";
             }else{
-                echo "寫入資料失敗<br>";
-                // dd($DataProdReference);
+                echo "建立基本資料失敗<br>";
             }
 
-
-            // 建立臨時料號
+            echo "建立臨時料號...<br>";
             app('App\Http\Controllers\SStockTempController')->create($request);
 
-            // 建立基本資料(對照)與後續作業...
-            echo "建立基本資料(對照)與後續作業...<br>";
+
+            
 
             // dd($input);
         }
