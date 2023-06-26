@@ -33,23 +33,23 @@ class SStockTempController extends Controller
         $check_temp_model_extis = $this->show($SK_NO4)->count();
         // 如果沒有建立料號
         if(!$check_temp_model_extis){
-
             $SStockTemp = SStockTemp::create(array_merge($input,
                                                         [
                                                             'SK_NO' => $SK_NO4
                                                         ]));
                                             
             if(isset($SStockTemp)){
-                echo "建立料號成功<br>";
+                echo "建立臨時料號成功<br>";
                 // dd($DataProdReference);
             }else{
-                echo "建立料號失敗<br>";
+                echo "建立臨時料號失敗<br>";
                 // dd($DataProdReference);
             }
+            echo "寫入規格資料到臨時料號...<br>";
         }else{
             echo "臨時料號已存在...<br>";
+            echo "寫入規格資料到現有臨時料號...<br>";
         }
-        // "寫入資料到現有臨時料號...<br>";
         $this->update($request, $SK_NO4);
     }
 
@@ -106,6 +106,7 @@ class SStockTempController extends Controller
                 // 中文規格
                 if(!strpos($key,'_en'))
                 {
+                    // 查詢中文規格名稱
                     $SpecItemName = app('App\Http\Controllers\MenuSpecItemController')->getSpecItemName($key);
                 
                     // 將中文規格每一行排成: 規格標題 全形空格 規格內容
@@ -127,9 +128,9 @@ class SStockTempController extends Controller
             }
 
         }
-        echo nl2br(str_replace('	','&emsp;',$SK_SPEC_tw))."<br>";
-        echo nl2br(str_replace('	','&emsp;',$SK_SPEC_en));
-        echo "<br>";
+        // echo nl2br(str_replace('	','&emsp;',$SK_SPEC_tw))."<br>";
+        // echo nl2br(str_replace('	','&emsp;',$SK_SPEC_en));
+        // echo "<br>";
 
         $SK_SPEC = rtrim($SK_SPEC_tw);
         $SK_ESPES = rtrim($SK_SPEC_en);
@@ -145,10 +146,10 @@ class SStockTempController extends Controller
         }else{
             $SK_SMNETS = '';
         }
-        echo nl2br(str_replace('	','&emsp;',$SK_SMNETS))."<br>";
+        // echo nl2br(str_replace('	','&emsp;',$SK_SMNETS))."<br>";
 
 
-        echo "寫入".$id."資料到現有臨時料號...<br>";
+        echo "寫入規格資料到".$id."現有臨時料號...<br>";
         try {
             $SStockTemp = SStockTemp::find($id)->update([
                                                             'SK_SPEC' => $SK_SPEC,
