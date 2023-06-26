@@ -61,6 +61,31 @@ class MenuSpecItemController extends Controller
         
     }
 
+    public function getSpecItemName($spec_item_name_form)
+    {
+        $MenuSpecItems = MenuSpecItem::select(  'spec_item_name',
+                                                'spec_item_name_en',
+                                                'spec_item_name_form');
+        $MenuSpecItemsUni1 = MenuSpecItemUniversal1::select('spec_item_name',
+                                                            'spec_item_name_en',
+                                                            'spec_item_name_form');
+        $MenuSpecItemsUni2 = MenuSpecItemUniversal2::select('spec_item_name',
+                                                            'spec_item_name_en',
+                                                            'spec_item_name_form');
+
+        $MenuSpecItemsAll = $MenuSpecItems->unionAll($MenuSpecItemsUni1)->unionAll($MenuSpecItemsUni2);
+        $MenuSpecItemsFinall = MenuSpecItem::select(  'spec_item_name')
+        ->from($MenuSpecItemsAll, 'spec_item')
+        ->where('spec_item_name_form', '=', $spec_item_name_form)->distinct()->get();
+        return $MenuSpecItemsFinall;
+
+
+
+
+
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
