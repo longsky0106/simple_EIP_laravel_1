@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\ProductDataController;
 
 use Illuminate\Http\Request;
 use App\Models\SStockTemp;
@@ -24,7 +25,18 @@ class SStockTempController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $input = $request->input();
         $SK_NO4 = $input['SK_NO4'];
@@ -51,17 +63,6 @@ class SStockTempController extends Controller
             echo "寫入規格資料到現有臨時料號...<br>";
         }
         $this->update($request, $SK_NO4);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -99,6 +100,7 @@ class SStockTempController extends Controller
         $input = $request->input();
         $SK_SPEC_tw = '';
         $SK_SPEC_en = '';
+        $Sec = 60;
 
         foreach($input as $key => $value){
             if($value){
@@ -160,10 +162,14 @@ class SStockTempController extends Controller
                                                             'SK_ESPES' => $SK_ESPES,
                                                             'SK_SMNETS' => $SK_SMNETS,
                                                         ]);
-            echo $id."寫入規格資料完成<br>";
+                                                        // dd($SStockTemp);//true
+                                                        echo "寫入規格資料完成<br>";
+            
         } catch (Throwable $e) {
             print "Error: ".$e->getMessage;
+            return ;
         }
+
     }
 
     /**
