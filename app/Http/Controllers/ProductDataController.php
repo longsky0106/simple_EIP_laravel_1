@@ -111,6 +111,7 @@ class ProductDataController extends Controller
      */
     public function store(Request $request)
     {
+        $Sec = 3;
         $error = 0;
         $input = $request->input();
         $new_Model = $input['create_Model'];
@@ -120,6 +121,7 @@ class ProductDataController extends Controller
         $SK_NO4 = $input['SK_NO4'];
         $categories = !empty($input['categories'])?($input['categories']):"0";
         $ProdType = !empty($input['ProdType'])?($input['ProdType']):"0";
+        $name_for_sell_tw = $input['name_for_sell_tw'];
 
         if(empty($new_Model)){
             echo "Model不可為空！<br>";
@@ -168,13 +170,38 @@ class ProductDataController extends Controller
                 echo "建立基本資料失敗<br>";
             }
 
-            echo "建立臨時料號...<br>";
-            app('App\Http\Controllers\SStockTempController')->create($request);
+            if(!empty($name_for_sell_tw)){
+                echo "儲存產品銷售用名稱...<br>";
+                $id = $new_Model;
+                $fd_name = app('App\Http\Controllers\SStockFDTempController')->show($id);
+                if($fd_name->count() > 0){
+                    app('App\Http\Controllers\SStockFDTempController')->update($request, $id);
+                }else{
+                    app('App\Http\Controllers\SStockFDTempController')->store($request);
+                }
+                
+            }
 
+            for($i=1;$i<3;$i++) {
+                $item = "SK_NO".$i;
+                if(!empty($$item)){
+                    $id = $$item;
+                    echo "更新規格資料到料號".$id."...<br>";
+                    // app('App\Http\Controllers\SStockController')->update($request, $id);                
+                }
+            }
 
-            
+            if(!empty($SK_NO4)){
+                echo "建立臨時料號...<br>";
+                app('App\Http\Controllers\SStockTempController')->store($request);                
+            }
 
-            // dd($input);
+            echo $Sec.'秒後回到上一頁';
+            echo "<script>
+                    setTimeout(function(){ 
+                        window.location.href = '/ProductDataManage'; 
+                    }, ".($Sec*1000).");
+                  </script>";
         }
 
 
