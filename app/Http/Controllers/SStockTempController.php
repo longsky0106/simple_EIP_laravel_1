@@ -52,16 +52,15 @@ class SStockTempController extends Controller
                                             
             if(isset($SStockTemp)){
                 echo "建立臨時料號成功<br>";
-                // dd($DataProdReference);
             }else{
                 echo "建立臨時料號失敗<br>";
-                // dd($DataProdReference);
             }
-            echo "寫入規格資料到臨時料號...<br>";
+            
         }else{
             echo "臨時料號已存在...<br>";
             echo "寫入規格資料到現有臨時料號...<br>";
         }
+        echo "寫入規格資料到臨時料號...<br>";
         $this->update($request, $SK_NO4);
     }
 
