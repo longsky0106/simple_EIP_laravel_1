@@ -72,7 +72,19 @@ class SStockTempController extends Controller
      */
     public function show($id)
     {
-        $tempModel = SStockTemp::select('SK_NO')->where('SK_NO', $id)->get();
+        $tempModel = SStockTemp::select(
+                                    'SK_NO'
+                                    , 'SK_NAME'
+                                    , 'SK_SPEC'
+                                    , 'SK_COLOR'
+                                    , 'SK_SIZE'
+                                    , 'SK_USE'
+                                    , 'SK_LOCATE'
+                                    , 'SK_SESPES'
+                                    , 'SK_ESPES'
+                                    , 'SK_REM'
+                                    , 'SK_SMNETS'
+                                )->where('SK_NO', $id)->first();
         return $tempModel;
     }
 
@@ -165,7 +177,7 @@ class SStockTempController extends Controller
                                                         echo "寫入規格資料完成<br>";
             
         } catch (Throwable $e) {
-            print "Error: ".$e->getMessage;
+            print "Error: ".$e->getMessage();
             return ;
         }
 
