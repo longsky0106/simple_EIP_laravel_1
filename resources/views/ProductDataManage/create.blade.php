@@ -118,7 +118,7 @@
 								   border-black hover:bg-slate-200 pl-2 
 								   pr-2 pt-1 pb-1 mr-2 rounded" type="submit"
 					>
-						更新/儲存  規格描述資料
+						儲存  規格描述資料
 					</button>
 				</div>
 		</form>
