@@ -8,7 +8,8 @@
         </div>	
         <div class="flex w-full p-1">
 			<label class="flex items-center w-24" for="spec_item_name">銷售品名</label>
-			<input class="flex-1 input input-sm sm:input-md input-bordered" type="text" id="" name="name_for_sell_tw" value="">
+			<input class="flex-1 input input-sm sm:input-md input-bordered" type="text" id="" name="name_for_sell_tw" 
+                    value="{{ $name_for_sell_tw }}">
         </div>
 
         @foreach($MenuSpecItems as $key => $MenuSpecItem)

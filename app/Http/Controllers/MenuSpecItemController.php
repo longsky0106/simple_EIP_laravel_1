@@ -136,11 +136,13 @@ class MenuSpecItemController extends Controller
 
         if(!str_ends_with($MainSK_NO, '_temp')){
             $DataSStock =  app('App\Http\Controllers\SStockController')->show($MainSK_NO);
+            $fd_name =  app('App\Http\Controllers\SStockFDController')->show($MainSK_NO)[0]['fd_name'];
         }else{
             $DataSStock =  app('App\Http\Controllers\SStockTempController')->show($MainSK_NO);
+            $fd_name =  app('App\Http\Controllers\SStockFDTempController')->show($MainSK_NO)[0]['fd_name'];
         }
-
-        $name_for_sell_tw = $DataSStock->SK_SESPES;
+        
+        $name_for_sell_tw = $fd_name;
         $name_for_sell_en = $DataSStock->SK_SESPES;
 
         $SK_SPEC_tw = explode("\r\n", $DataSStock->getAttribute('SK_SPEC'));
@@ -159,6 +161,10 @@ class MenuSpecItemController extends Controller
         $SK_SPEC_en_array_final = [];
         foreach($SK_SPEC_en as $key => $val){
             $SK_SPEC_en_array = explode('	', $val);
+            if($SK_SPEC_en_array[0] == 'Dimensions'){
+                $SK_SPEC_en_array[0] = $SK_SPEC_en_array[0].' (mm)';
+            }
+            
             if(isset($SK_SPEC_en_array[0]) && isset($SK_SPEC_en_array[1])){
                 $SK_SPEC_en_array_final[$SK_SPEC_en_array[0]] = $SK_SPEC_en_array[1];  
             }
