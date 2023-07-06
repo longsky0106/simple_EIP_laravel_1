@@ -142,20 +142,17 @@ class MenuSpecItemController extends Controller
 
         $name_for_sell_tw = $DataSStock->SK_SESPES;
         $name_for_sell_en = $DataSStock->SK_SESPES;
-// dd($name_for_sell_en);
 
         $SK_SPEC_tw = explode("\r\n", $DataSStock->getAttribute('SK_SPEC'));
         $SK_SPEC_tw_array = "";
         $SK_SPEC_tw_array_final = [];
         foreach($SK_SPEC_tw as $key => $val){
-            $SK_SPEC_tw_array = explode('	', $val);//dd($SK_SPEC_tw_array);
+            $SK_SPEC_tw_array = explode('	', $val);
             if(isset($SK_SPEC_tw_array[0]) && isset($SK_SPEC_tw_array[1])){
                 $SK_SPEC_tw_array_final[$SK_SPEC_tw_array[0]] = $SK_SPEC_tw_array[1];
             }            
         }
         $SK_SPEC_tw = $SK_SPEC_tw_array_final?$SK_SPEC_tw_array_final:'';
-
-// $SK_SPEC_tw = '';
 
         $SK_SPEC_en = explode("\r\n", $DataSStock->getAttribute('SK_ESPES'));
         $SK_SPEC_en_array = "";
@@ -168,10 +165,6 @@ class MenuSpecItemController extends Controller
 
         }
         $SK_SPEC_en = $SK_SPEC_en_array_final?$SK_SPEC_en_array_final:'';
-
-        // $SK_SPEC_en = '';
-        
-        
 
         return view('ProductDataManage.ModelMenuSpecItems', compact('MenuSpecItems', 'SK_SPEC_tw', 'SK_SPEC_en', 
                     'name_for_sell_tw', 'name_for_sell_en'));
