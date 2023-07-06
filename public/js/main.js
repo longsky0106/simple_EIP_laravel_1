@@ -57,10 +57,41 @@
 	   
 		// 取得目前上方查詢結果的料號
 		var SK_NO = $("#sk_no1").text();
+		var edit_model = $("#edit_model").text();
+		var SK_NO1 = $("#SK_NO1").val();
+		var SK_NO2 = $("#SK_NO2").val();
+		var SK_NO3 = $("#SK_NO3").val();
+		var SK_NO4 = $("#SK_NO4").val();
+		
+		switch(true)
+        {
+            case (SK_NO1 !== ""):
+                MainSK_NO = SK_NO1;
+                break;
+            case (SK_NO2 !== ""):
+                MainSK_NO = SK_NO2;
+                break;
+            case (SK_NO3 !== ""):
+                MainSK_NO = SK_NO3;
+                break;
+            case (SK_NO4 !== ""):
+                MainSK_NO = SK_NO4;
+                break;
+            default:    
+            	MainSK_NO = '';
+        }
+		// MainSK_NO = 'PPOEMR084-3';
+		if (typeof edit_model !== 'undefined') {
+			MenuSpecItemUrl = '/ModelMenuSpecItems/';
+			MenuSpecItemValue = shop_menu2_id + '/' + MainSK_NO;
+		}else{
+			MenuSpecItemUrl = '/MenuSpecItems/';
+			MenuSpecItemValue = shop_menu2_id;			
+		}
 
 		if(shop_menu2_id != 0){
 			// 送出AJAX資料到後端來取得規格項目
-			axios.get(url + '/MenuSpecItems/' + shop_menu2_id )
+			axios.get(url + MenuSpecItemUrl + MenuSpecItemValue )
 			.then(function (response) {
 				let data = response.data;
 				$("#spec_edit").html(data);
