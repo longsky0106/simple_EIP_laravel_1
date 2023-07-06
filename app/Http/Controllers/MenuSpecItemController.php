@@ -113,9 +113,68 @@ class MenuSpecItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $MainSK_NO)
     {
-        //
+        $MenuSpecItemsUni1 = MenuSpecItemUniversal1::all();
+        $MenuSpecItemsUni2 = MenuSpecItemUniversal2::all();
+
+        if($id!=0){
+            $prod_class_id = MenuProdClassShop::with('MenuProdClass')->where('shop_menu2_id', $id)
+                                                ->first()->spec_menu_class_index;
+        }else{
+            $prod_class_id = 0;
+        }
+        
+        $MenuSpecItems = MenuProdClass::with('MenuSpecItems')->where('prod_class_id', $prod_class_id)->get()
+                                        ->pluck('MenuSpecItems') // 取得MenuSpecItems子集合
+                                        ->flatten();
+        $MenuSpecItemAll = $MenuSpecItemsUni1->concat($MenuSpecItems)
+                                            ->concat($MenuSpecItemsUni2); // 連接所有集合
+
+        $MenuSpecItems = $MenuSpecItemAll;
+
+
+        if(!str_ends_with($MainSK_NO, '_temp')){
+            $DataSStock =  app('App\Http\Controllers\SStockController')->show($MainSK_NO);
+        }else{
+            $DataSStock =  app('App\Http\Controllers\SStockTempController')->show($MainSK_NO);
+        }
+
+        $name_for_sell_tw = $DataSStock->SK_SESPES;
+        $name_for_sell_en = $DataSStock->SK_SESPES;
+// dd($name_for_sell_en);
+
+        $SK_SPEC_tw = explode("\r\n", $DataSStock->getAttribute('SK_SPEC'));
+        $SK_SPEC_tw_array = "";
+        $SK_SPEC_tw_array_final = [];
+        foreach($SK_SPEC_tw as $key => $val){
+            $SK_SPEC_tw_array = explode('	', $val);//dd($SK_SPEC_tw_array);
+            if(isset($SK_SPEC_tw_array[0]) && isset($SK_SPEC_tw_array[1])){
+                $SK_SPEC_tw_array_final[$SK_SPEC_tw_array[0]] = $SK_SPEC_tw_array[1];
+            }            
+        }
+        $SK_SPEC_tw = $SK_SPEC_tw_array_final?$SK_SPEC_tw_array_final:'';
+
+// $SK_SPEC_tw = '';
+
+        $SK_SPEC_en = explode("\r\n", $DataSStock->getAttribute('SK_ESPES'));
+        $SK_SPEC_en_array = "";
+        $SK_SPEC_en_array_final = [];
+        foreach($SK_SPEC_en as $key => $val){
+            $SK_SPEC_en_array = explode('	', $val);
+            if(isset($SK_SPEC_en_array[0]) && isset($SK_SPEC_en_array[1])){
+                $SK_SPEC_en_array_final[$SK_SPEC_en_array[0]] = $SK_SPEC_en_array[1];  
+            }
+
+        }
+        $SK_SPEC_en = $SK_SPEC_en_array_final?$SK_SPEC_en_array_final:'';
+
+        // $SK_SPEC_en = '';
+        
+        
+
+        return view('ProductDataManage.ModelMenuSpecItems', compact('MenuSpecItems', 'SK_SPEC_tw', 'SK_SPEC_en', 
+                    'name_for_sell_tw', 'name_for_sell_en'));
     }
 
     /**
