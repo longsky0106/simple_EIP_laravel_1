@@ -44,8 +44,8 @@
 				料號3(備用)<input class="input input-sm input-bordered" type="text" id="SK_NO3" name="SK_NO3" value="{{ $DataProdsReference->SK_NO3}}"><br>
 				料號4(臨時)<input class="input input-sm input-bordered" type="text" id="SK_NO4" name="SK_NO4" value="{{ $DataProdsReference->SK_NO4}}"><br>
 				售價&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Price" value="{{ $DataProdsReference->Price}}"><br>
-				建議售價<input class="input input-sm input-bordered" type="text" id="" name="Suggested_Price" value="{{ $DataProdsReference->Suggested_Price}}"><br>
-				成本&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Cost_Price" value="{{ $DataProdsReference->Cost_Price}}"><br>
+				建議售價<input class="input input-sm input-bordered" type="text" id="" name="Suggested_Price" value="{{ $DataProdsReference->getAttribute('Suggested Price')}}"><br>
+				成本&emsp;&emsp;<input class="input input-sm input-bordered" type="text" id="" name="Cost_Price" value="{{ $DataProdsReference->getAttribute('Cost Price')}}"><br>
 				<br>
 			</div>
 
