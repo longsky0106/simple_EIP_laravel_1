@@ -21,7 +21,7 @@ Route::group(['prefix' => config('routes.prefix')], function () {
     Route::resource('ProductDataManage', 'App\Http\Controllers\ProductDataController');
     Route::get('/shop_menus2/{id}', 'App\Http\Controllers\ProductDataController@getShopMenu2')->where('id', '[0-9]+');
     Route::get('/MenuSpecItems/{id}', 'App\Http\Controllers\MenuSpecItemController@index')->where('id', '[0-9]+');
-    Route::get('/ModelMenuSpecItems/{id}/{model}', 'App\Http\Controllers\MenuSpecItemController@show')->where('id', '[0-9]+');
+    Route::get('/ModelMenuSpecItems/{id}/{MainSK_NO}', 'App\Http\Controllers\MenuSpecItemController@show')->where('id', '[0-9]+');
     Route::get('/prod_base_search/{id}', 'App\Http\Controllers\ProductDataController@show');
     Route::get('/check_temp_skno/{id}', 'App\Http\Controllers\SStockTempController@show');
 Route::get('/check_skno/{id}', 'App\Http\Controllers\SStockController@show');
