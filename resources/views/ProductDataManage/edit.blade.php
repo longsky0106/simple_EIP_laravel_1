@@ -56,12 +56,27 @@
 				設定產品分類: <select class="select select-bordered select-sm max-w-xs pt-0 pb-0" id="categories" name="categories" autocomplete="off">
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
-										<option value="{{$shopMenu1->shop_menu1_id}}">{{$shopMenu1->shop_menu1_name}}</option>
+										<option value="{{$shopMenu1->shop_menu1_id}}"
+											@if($shopMenu1->shop_menu1_name == $DataSStock->SK_USE)
+												{{' selected="selected"'}}
+											@endif
+											>{{$shopMenu1->shop_menu1_name}}
+										</option>
 									@endforeach
 								</select>
 								<input type="hidden" name="categories_text" id="categories_text" value="" />
+
+								
 								<select class="select select-bordered select-sm max-w-xs pt-0 pb-0" id="ProdType" name="ProdType" autocomplete="off">
 									<option value="0">選擇產品類別</option>
+									@foreach($shopMenus2 as $shopMenu2)
+										<option value="{{$shopMenu2->shop_menu2_id}}"
+											@if($shopMenu2->shop_menu2_name == $DataSStock->SK_LOCATE)
+												{{' selected="selected"'}}
+											@endif
+											>{{$shopMenu2->shop_menu2_name}}
+										</option>
+									@endforeach
 								</select>
 								<input type="hidden" name="ProdType_text" id="ProdType_text" value="" />
 								<br />
