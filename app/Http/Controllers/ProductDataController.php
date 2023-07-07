@@ -238,8 +238,7 @@ class ProductDataController extends Controller
                                                 'shop_menu1_name',
                                                 'shop_menu1_rem')
                                         ->get();
-        // return view('ProductDataManage.create', compact('shopMenus1', 'DefaultMenuSpecItems'));
-
+        
         $DataProdsReference = DataProdReferenceModel::select(
             'ID'
             , 'Model'
@@ -297,13 +296,19 @@ class ProductDataController extends Controller
             $MainSK_NO = '';
         }
 
-        $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show(0, $MainSK_NO);
-
         if($MainSK_NO != $SK_NO4){
             $DataSStock =  app('App\Http\Controllers\SStockController')->show($MainSK_NO);
         }else{
             $DataSStock =  app('App\Http\Controllers\SStockTempController')->show($MainSK_NO);
         }
+
+        $shopMenus1_id = MenuProdTypeShop::select('shop_menu1_id')
+        ->where('shop_menu1_name', $DataSStock->SK_USE)->get();
+        $shopMenus1_id = $shopMenus1_id[0]['shop_menu1_id'];
+        $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $shopMenus1_id)->get()
+        ->pluck('MenuProdClassShop')->flatten();
+
+        $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show($shopMenus1_id, $MainSK_NO);
 
         $description_all_tw = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[0];
         $zh_tw_description = rtrim(explode("---Features---", $description_all_tw)[0]);
@@ -320,8 +325,7 @@ class ProductDataController extends Controller
             $en_us_features = '';
         }
 
-
-        return view('ProductDataManage.edit', compact('shopMenus1', 'DefaultMenuSpecItems', 'DataProdsReference', 
+        return view('ProductDataManage.edit', compact('shopMenus1','shopMenus2', 'DefaultMenuSpecItems', 'DataProdsReference', 
                     'DataSStock', 'zh_tw_description', 'en_us_description', 'zh_tw_features', 'en_us_features'));
 
     }
