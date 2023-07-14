@@ -81,7 +81,7 @@ class SStockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $SK_NO)
     {
         $input = $request->input();
         $SK_SPEC_tw = '';
@@ -131,9 +131,9 @@ class SStockController extends Controller
             $SK_SMNETS = '';
         }
 
-        echo "寫入規格資料到".$id."現有臨時料號...<br>";
+        echo "寫入規格資料到".$SK_NO."現有料號...<br>";
         try {
-            $SStock = SStock::find($id)->update([
+            $SStock = SStock::where('SK_NO', $SK_NO)->update([
                                                     'SK_SPEC' => $SK_SPEC,
                                                     'SK_COLOR' => $input['Color'],
                                                     'SK_USE' => $input['categories_text'],
