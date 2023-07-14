@@ -106,7 +106,7 @@ class SStockTempController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $SK_NO4)
     {
         $input = $request->input();
         $SK_SPEC_tw = '';
@@ -162,16 +162,16 @@ class SStockTempController extends Controller
         // echo nl2br(str_replace('	','&emsp;',$SK_SMNETS))."<br>";
 
 
-        echo "寫入規格資料到".$id."現有臨時料號...<br>";
+        echo "寫入規格資料到".$SK_NO4."現有臨時料號...<br>";
         try {
-            $SStockTemp = SStockTemp::find($id)->update([
+            $SStockTemp = SStockTemp::where('SK_NO', $SK_NO4)->update([
                                                             'SK_SPEC' => $SK_SPEC,
                                                             'SK_COLOR' => $input['Color'],
                                                             'SK_USE' => $input['categories_text'],
                                                             'SK_LOCATE' => $input['ProdType_text'],
                                                             'SK_SESPES' => $input['name_for_sell_en'],
                                                             'SK_ESPES' => $SK_ESPES,
-                                                            'SK_SMNETS' => $SK_SMNETS,
+                                                            'SK_SMNETS' => $SK_SMNETS
                                                         ]);
                                                         // dd($SStockTemp);//true
                                                         echo "寫入規格資料完成<br>";
