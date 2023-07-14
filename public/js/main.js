@@ -1,5 +1,11 @@
 ﻿$(document).ready(function(){
-
+	if($("#categories :selected").text() != '選擇產品系列'){
+		$("#categories_text").val($("#categories :selected").text());
+	}
+	if($("#ProdType :selected").text() != '選擇產品類別'){
+		$("#ProdType_text").val($("#ProdType :selected").text());
+	}
+	
 	var url = $('meta[name="base_url"]').attr('content');
 
 	// 檢查該型號的基本資料(對照)是否已存在 PCT.dbo.Data_Prod_Reference
