@@ -302,28 +302,50 @@ class ProductDataController extends Controller
             $DataSStock =  app('App\Http\Controllers\SStockTempController')->show($MainSK_NO);
         }
 
-        $shopMenus1_id = MenuProdTypeShop::select('shop_menu1_id')
-        ->where('shop_menu1_name', $DataSStock->SK_USE)->get();
-        $shopMenus1_id = $shopMenus1_id[0]['shop_menu1_id'];
-        $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $shopMenus1_id)->get()
-        ->pluck('MenuProdClassShop')->flatten();
+        if($DataSStock->SK_USE){
+            $shopMenus1_id = MenuProdTypeShop::select('shop_menu1_id')
+            ->where('shop_menu1_name', $DataSStock->SK_USE)->get();
+            $shopMenus1_id = $shopMenus1_id->first()?->shop_menu1_id;
+            // $shopMenus1_id = 1;
+            $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', $shopMenus1_id)->get()
+            ->pluck('MenuProdClassShop')->flatten();
 
-        $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show($shopMenus1_id, $MainSK_NO);
-
-        $description_all_tw = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[0];
-        $zh_tw_description = rtrim(explode("---Features---", $description_all_tw)[0]);
-        
-        if(isset(explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[1])){
-            $description_all_en = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[1];
-            $en_us_description = rtrim(explode("---Features---", $description_all_en)[0]);
-
-            $zh_tw_features = rtrim(explode("---Features---", $description_all_tw)[1]);
-            $en_us_features = rtrim(explode("---Features---", $description_all_en)[1]);            
+            if($DataSStock->SK_LOCATE){
+                // $shopMenus2_id = $shopMenus2->where('shop_menu2_name', $DataSStock->SK_LOCATE)[2]['shop_menu2_id'];
+                $shopMenus2_id = $shopMenus2->where('shop_menu2_name', $DataSStock->SK_LOCATE)->first()?->shop_menu2_id;
+                // dd($shopMenus2);
+                $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show($shopMenus2_id, $MainSK_NO);
+            }
         }else{
+            $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', 1)->get()
+            ->pluck('MenuProdClassShop')->flatten();
+            // $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show(1, $MainSK_NO);
+            $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->index(0);
+        }
+
+
+        if($DataSStock->SK_SMNETS){
+            $description_all_tw = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[0];
+            $zh_tw_description = rtrim(explode("---Features---", $description_all_tw)[0]);
+            
+            if(isset(explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[1])){
+                $description_all_en = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[1];
+                $en_us_description = rtrim(explode("---Features---", $description_all_en)[0]);
+
+                $zh_tw_features = rtrim(explode("---Features---", $description_all_tw)[1]);
+                $en_us_features = rtrim(explode("---Features---", $description_all_en)[1]);            
+            }else{
+                $en_us_description = '';
+                $zh_tw_features = '';
+                $en_us_features = '';
+            }            
+        }else{
+            $zh_tw_description = '';
             $en_us_description = '';
             $zh_tw_features = '';
             $en_us_features = '';
         }
+
 
         return view('ProductDataManage.edit', compact('shopMenus1','shopMenus2', 'DefaultMenuSpecItems', 'DataProdsReference', 
                     'DataSStock', 'zh_tw_description', 'en_us_description', 'zh_tw_features', 'en_us_features'));
@@ -369,15 +391,17 @@ class ProductDataController extends Controller
             $SK_NO4 = empty($SK_NO4)?'':$SK_NO4;
 
             
-            echo "更新基本資料...<br>";dd($input);
+            echo "更新基本資料...<br>";//dd($input);
             try {
-                DataProdReferenceModel::find($id)->update(array_merge($input,
-                                                            [
+                DataProdReferenceModel::where('Model', $input['Model'])->update([
                                                                 'SK_NO1' => $SK_NO1,
                                                                 'SK_NO2' => $SK_NO2,
                                                                 'SK_NO3' => $SK_NO3,
-                                                                'SK_NO4' => $SK_NO4
-                                                            ]));
+                                                                'SK_NO4' => $SK_NO4,
+                                                                'Price' => $input['Price'],
+                                                                'Suggested Price' => $input['Suggested_Price'],
+                                                                'Cost Price' => $input['Cost_Price']
+                                                            ]);
 
             } catch (Throwable $e) {
                 print "Error: ".$e->getMessage();
@@ -399,9 +423,9 @@ class ProductDataController extends Controller
             for($i=1;$i<3;$i++) {
                 $item = "SK_NO".$i;
                 if(!empty($$item)){
-                    $id = $$item;
+                    $SK_NO = $$item;
                     echo "更新規格資料到料號".$id."...<br>";
-                    // app('App\Http\Controllers\SStockController')->update($request, $id);                
+                    app('App\Http\Controllers\SStockController')->update($request, $SK_NO);                
                 }
             }
 
