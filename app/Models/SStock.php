@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SStock extends Model
 {
-    protected $connection = 'sqlsrv_ly';
-    // protected $connection = 'sqlsrv';
+    // protected $connection = 'sqlsrv_ly';
+    protected $connection = 'sqlsrv';
     protected $table = 'SSTOCK';
     protected $primaryKey = 'SK_NO';
     protected $keyType = 'string';
