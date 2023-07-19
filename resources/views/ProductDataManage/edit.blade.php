@@ -58,7 +58,7 @@
 									<option value="0">選擇產品系列</option>
 									@foreach($shopMenus1 as $shopMenu1)
 										<option value="{{$shopMenu1->shop_menu1_id}}"
-											@if($shopMenu1->shop_menu1_name == $DataSStock->SK_USE)
+											@if($shopMenu1->shop_menu1_name == $DataSStock?->SK_USE)
 												{{' selected="selected"'}}
 											@endif
 											>{{$shopMenu1->shop_menu1_name}}
@@ -72,7 +72,7 @@
 									<option value="0">選擇產品類別</option>
 									@foreach($shopMenus2 as $shopMenu2)
 										<option value="{{$shopMenu2->shop_menu2_id}}"
-											@if($shopMenu2->shop_menu2_name == $DataSStock->SK_LOCATE)
+											@if($shopMenu2->shop_menu2_name == $DataSStock?->SK_LOCATE)
 												{{' selected="selected"'}}
 											@endif
 											>{{$shopMenu2->shop_menu2_name}}

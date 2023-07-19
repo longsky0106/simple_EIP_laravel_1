@@ -314,7 +314,7 @@ class ProductDataController extends Controller
             $DataSStock =  app('App\Http\Controllers\SStockTempController')->show($MainSK_NO);
         }
 
-        if($DataSStock->SK_USE){
+        if($DataSStock?->SK_USE){
             $shopMenus1_id = MenuProdTypeShop::select('shop_menu1_id')
             ->where('shop_menu1_name', $DataSStock->SK_USE)->get();
             $shopMenus1_id = $shopMenus1_id->first()?->shop_menu1_id;
@@ -336,7 +336,7 @@ class ProductDataController extends Controller
         }
 
 
-        if($DataSStock->SK_SMNETS){
+        if($DataSStock?->SK_SMNETS){
             $description_all_tw = explode("---DESCRIPTION---", $DataSStock->SK_SMNETS)[0];
             $zh_tw_description = rtrim(explode("---Features---", $description_all_tw)[0]);
             
