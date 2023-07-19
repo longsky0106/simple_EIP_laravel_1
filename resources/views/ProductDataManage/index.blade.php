@@ -165,7 +165,7 @@
 								<div class="hidden" >型號/料號</div>
 								<div class="inline-block w-full h-full relative" >
 									<div id="">
-										<a class="text-fuchsia-900" href="{{ route('ProductDataManage.edit', $DataProdReference->Model ) }}">{{ $DataProdReference->Model }}</a>
+										<a class="text-fuchsia-900 hover:underline" href="{{ route('ProductDataManage.edit', $DataProdReference->Model ) }}">{{ $DataProdReference->Model }}</a>
 									</div>
 									<div>{{ $DataProdReference->SK_NO1 }}</div>
 								</div>
