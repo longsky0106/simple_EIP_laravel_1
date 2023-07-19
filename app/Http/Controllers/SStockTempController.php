@@ -42,7 +42,7 @@ class SStockTempController extends Controller
         $SK_NO4 = $input['SK_NO4'];
 
         $SStockTemp = new SStockTemp();
-        $check_temp_model_extis = $this->show($SK_NO4)->count();
+        $check_temp_model_extis = $this->show($SK_NO4)?->count();
         // 如果沒有建立料號
         if(!$check_temp_model_extis){
             $SStockTemp = SStockTemp::create(array_merge($input,
