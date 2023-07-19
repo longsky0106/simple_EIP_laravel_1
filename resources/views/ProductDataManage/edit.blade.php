@@ -36,6 +36,7 @@
 			@method('PUT')
 			<label style="font-size:1.2em;font-weight:bold;">型號
 				<label id="edit_model">{{ $DataProdsReference->getAttribute('Model') }}</label>
+				<input type="hidden" name="create_Model" id="create_Model" value="{{ $DataProdsReference->getAttribute('Model') }}" />
 			</label>			
 			<div id="show_data">			
 				<span><b>基本資料</b></span><br>
