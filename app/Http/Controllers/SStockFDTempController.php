@@ -85,7 +85,7 @@ class SStockFDTempController extends Controller
     {
         $input = $request->input();
         try {
-            $SStockFDTemp = SStockFDTemp::find($id)->update(['fd_name' => $input['name_for_sell_tw']]);
+            $SStockFDTemp = SStockFDTemp::where('fd_skno', $id)->update(['fd_name' => $input['name_for_sell_tw']]);
                                                         // dd($SStockFDTemp);//true
                                                         echo "儲存產品銷售用名稱完成<br>";
             
