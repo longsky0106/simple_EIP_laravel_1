@@ -173,14 +173,26 @@ class ProductDataController extends Controller
 
             if(!empty($name_for_sell_tw)){
                 echo "儲存產品銷售用名稱...<br>";
-                $id = $new_Model;
-                $fd_name = app('App\Http\Controllers\SStockFDTempController')->show($id);
-                if($fd_name->count() > 0){
-                    app('App\Http\Controllers\SStockFDTempController')->update($request, $id);
+
+                if(!empty($SK_NO1.$SK_NO2.$SK_NO3)){
+                    echo "正規品料號存在，寫入到正規品資料表...<br>";
+                    $id = $new_Model;
+                    $fd_name = app('App\Http\Controllers\SStockFDController')->show($id);
+                    if($fd_name->count() > 0){
+                        app('App\Http\Controllers\SStockFDController')->update($request, $id);
+                    }else{
+                        app('App\Http\Controllers\SStockFDController')->store($request);
+                    }                   
                 }else{
-                    app('App\Http\Controllers\SStockFDTempController')->store($request);
+                    echo "僅臨時料號存在，寫入到臨時料號資料表...<br>";
+                    $id = $new_Model.'_temp';
+                    $fd_name = app('App\Http\Controllers\SStockFDTempController')->show($id);
+                    if($fd_name->count() > 0){
+                        app('App\Http\Controllers\SStockFDTempController')->update($request, $id);
+                    }else{
+                        app('App\Http\Controllers\SStockFDTempController')->store($request);
+                    }
                 }
-                
             }
 
             for($i=1;$i<3;$i++) {
@@ -364,6 +376,7 @@ class ProductDataController extends Controller
         $Sec = 3;
         $error = 0;
         $input = $request->input();
+        $new_Model = $input['create_Model'];
         $SK_NO1 = $input['SK_NO1'];
         $SK_NO2 = $input['SK_NO2'];
         $SK_NO3 = $input['SK_NO3'];
@@ -410,14 +423,26 @@ class ProductDataController extends Controller
 
             if(!empty($name_for_sell_tw)){
                 echo "儲存產品銷售用名稱...<br>";
-                $id = $input['create_Model'];
-                $fd_name = app('App\Http\Controllers\SStockFDTempController')->show($id);
-                if($fd_name->count() > 0){
-                    app('App\Http\Controllers\SStockFDTempController')->update($request, $id);
+
+                if(!empty($SK_NO1.$SK_NO2.$SK_NO3)){
+                    echo "正規品料號存在，寫入到正規品資料表...<br>";
+                    $id = $new_Model;
+                    $fd_name = app('App\Http\Controllers\SStockFDController')->show($id);
+                    if($fd_name->count() > 0){
+                        app('App\Http\Controllers\SStockFDController')->update($request, $id);
+                    }else{
+                        app('App\Http\Controllers\SStockFDController')->store($request);
+                    }                   
                 }else{
-                    app('App\Http\Controllers\SStockFDTempController')->store($request);
+                    echo "僅臨時料號存在，寫入到臨時料號資料表...<br>";
+                    $id = $new_Model.'_temp';
+                    $fd_name = app('App\Http\Controllers\SStockFDTempController')->show($id);
+                    if($fd_name->count() > 0){
+                        app('App\Http\Controllers\SStockFDTempController')->update($request, $id);
+                    }else{
+                        app('App\Http\Controllers\SStockFDTempController')->store($request);
+                    }
                 }
-                
             }
 
             for($i=1;$i<3;$i++) {
