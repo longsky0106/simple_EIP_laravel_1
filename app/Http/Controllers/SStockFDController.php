@@ -83,7 +83,16 @@ class SStockFDController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->input();
+        try {
+            $SStockFD = SStockFD::where('fd_skno', $id)->update(['fd_name' => $input['name_for_sell_tw']]);
+                                                        // dd($SStockFD);//true
+                                                        echo "儲存產品銷售用名稱完成<br>";
+            
+        } catch (Throwable $e) {
+            print "Error: ".$e->getMessage();
+            return ;
+        }
     }
 
     /**
