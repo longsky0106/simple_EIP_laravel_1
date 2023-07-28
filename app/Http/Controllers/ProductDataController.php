@@ -48,15 +48,13 @@ class ProductDataController extends Controller
             ,'SPH_NowQtyByWare'
         )->from(function ($sub) {
             $sub->select('*')->from('Data_Prod_Reference');
-        }, 'PCT')
+        }, 'Data_Prod_Reference')
         ->leftJoin('SSTOCK', 'SK_NO1', '=', DataProdReferenceModel::raw('SK_NO collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCK_temp', 'SK_NO4', '=', DataProdReferenceModel::raw('SSTOCK_temp.SK_NO collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCKFD', 'SK_NO1', '=', DataProdReferenceModel::raw('fd_skno collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCKFD_temp', 'SK_NO4', '=', DataProdReferenceModel::raw('SSTOCKFD_temp.fd_skno collate chinese_taiwan_stroke_ci_as'))
-        ->leftJoinSub(
-            DataProdReferenceModel::select('*')->from('View_SPHNowQtyByWare')->where('WD_WARE', '=', 'A'), 
-            'QTY', 'SK_NO1', '=', DataProdReferenceModel::raw('WD_SKNO collate chinese_taiwan_stroke_ci_as')
-        )
+        ->leftJoin(DataProdReferenceModel::raw("(SELECT * FROM View_SPHNowQtyByWare WHERE WD_WARE = 'A') as QTY"), 'SK_NO1', '=', 
+                    DataProdReferenceModel::raw('WD_SKNO collate chinese_taiwan_stroke_ci_as'))
         ->where(function ($query) use($search_column,$search_text) {
             for ($i = 0; $i < count($search_column); $i++){
                $query->orwhere($search_column[$i], 'LIKE',  '%'.$search_text. '%');
@@ -195,12 +193,12 @@ class ProductDataController extends Controller
                 }
             }
 
-            for($i=1;$i<3;$i++) {
+            for($i=1;$i<=3;$i++) {
                 $item = "SK_NO".$i;
                 if(!empty($$item)){
                     $id = $$item;
                     echo "更新規格資料到料號".$id."...<br>";
-                    // app('App\Http\Controllers\SStockController')->update($request, $id);                
+                    app('App\Http\Controllers\SStockController')->update($request, $id);                
                 }
             }
 
@@ -274,15 +272,13 @@ class ProductDataController extends Controller
             ,'SPH_NowQtyByWare'
         )->from(function ($sub) {
             $sub->select('*')->from('Data_Prod_Reference');
-        }, 'PCT')
+        }, 'Data_Prod_Reference')
         ->leftJoin('SSTOCK', 'SK_NO1', '=', DataProdReferenceModel::raw('SK_NO collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCK_temp', 'SK_NO4', '=', DataProdReferenceModel::raw('SSTOCK_temp.SK_NO collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCKFD', 'SK_NO1', '=', DataProdReferenceModel::raw('fd_skno collate chinese_taiwan_stroke_ci_as'))
         ->leftJoin('SSTOCKFD_temp', 'SK_NO4', '=', DataProdReferenceModel::raw('SSTOCKFD_temp.fd_skno collate chinese_taiwan_stroke_ci_as'))
-        ->leftJoinSub(
-            DataProdReferenceModel::select('*')->from('View_SPHNowQtyByWare')->where('WD_WARE', '=', 'A'), 
-            'QTY', 'SK_NO1', '=', DataProdReferenceModel::raw('WD_SKNO collate chinese_taiwan_stroke_ci_as')
-        )
+        ->leftJoin(DataProdReferenceModel::raw("(SELECT * FROM View_SPHNowQtyByWare WHERE WD_WARE = 'A') as QTY"), 'SK_NO1', '=', 
+                    DataProdReferenceModel::raw('WD_SKNO collate chinese_taiwan_stroke_ci_as'))
         ->where('Model', $id)->first();
 
         $SK_NO1 = $DataProdsReference->SK_NO1;
@@ -327,6 +323,8 @@ class ProductDataController extends Controller
                 $shopMenus2_id = $shopMenus2->where('shop_menu2_name', $DataSStock->SK_LOCATE)->first()?->shop_menu2_id;
                 // dd($shopMenus2);
                 $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->show($shopMenus2_id, $MainSK_NO);
+            }else{
+                $DefaultMenuSpecItems = app('App\Http\Controllers\MenuSpecItemController')->index(0);
             }
         }else{
             $shopMenus2 = MenuProdTypeShop::with('MenuProdClassShop')->where('shop_menu1_id', 1)->get()
@@ -445,7 +443,7 @@ class ProductDataController extends Controller
                 }
             }
 
-            for($i=1;$i<3;$i++) {
+            for($i=1;$i<=3;$i++) {
                 $item = "SK_NO".$i;
                 if(!empty($$item)){
                     $SK_NO = $$item;
@@ -460,11 +458,11 @@ class ProductDataController extends Controller
             }
 
             echo $Sec.'秒後回到上一頁';
-/*             echo "<script>
+                /*  echo "<script>
                     setTimeout(function(){ 
                         window.location.href = '/ProductDataManage'; 
                     }, ".($Sec*1000).");
-                  </script>"; */
+                    </script>"; */
         }
     }
 

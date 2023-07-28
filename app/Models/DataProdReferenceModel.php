@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DataProdReferenceModel extends Model
 {
+    use SoftDeletes;
     protected $connection = 'sqlsrv';
     protected $table = 'Data_Prod_Reference';
     public $timestamps = false;
