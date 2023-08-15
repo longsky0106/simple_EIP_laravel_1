@@ -112,6 +112,30 @@
 
 });
 
+function btn_delete_prod(){
+	var Data_Prod_Ref_ID = new Array();
+	var Model_array = new Array();
+	$("input[name='Data_Prod_Ref_ID[]']:checked").each(function() {
+		Data_Prod_Ref_ID.push($(this).val());
+		Model_array.push($.trim($("#"+$(this).val()).text()) + "\n");
+	});
+
+	if(confirm("確定要刪除以下項目?\n" + Model_array) && Data_Prod_Ref_ID != ""){
+		axios.post('/ProductDataManage/'+Data_Prod_Ref_ID+'|'+Model_array, {
+			_method: 'DELETE'
+		}).catch(function (error) {
+			alert(error);
+			console.log(error);
+		}).then(res => {
+			let data = res.data;
+			console.log(data);
+			alert(data);
+			location.reload();
+		});		
+	}
+
+}
+
 function createTempSkno(){
 	var Model = $("#SK_create").val();
 	if(!Model){

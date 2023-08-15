@@ -474,6 +474,6 @@ class ProductDataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo $id.'已刪除';
     }
 }
