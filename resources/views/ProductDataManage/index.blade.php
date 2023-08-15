@@ -16,6 +16,11 @@
 		
 		<!-- @vite('resources/css/app.css') -->
 		<!-- @vite('resources/js/app.js') -->
+
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+		<script src="{{ asset('js/main.js')}}"></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -64,9 +69,9 @@
 					<button class="bg-slate-100 border-l border-b border-r border-black hover:bg-slate-200 pl-2 pr-2 pt-1 pb-1 mr-2 rounded" type="submit">新增一筆資料</button>
 				</form>
 				<!-- <button type="" name="" value="">更新所選資料</button> -->
-				<form method="GET" action="">
-					<button id="delete_btn" class="bg-red-600 hover:bg-red-800 text-white pl-2 pr-2 pt-1 pb-1 mr-2 rounded opacity-25" type="" name="" value="" onclick="btn_delete_prod()" disabled>刪除所選資料</button>
-				</form>
+				
+					<button id="delete_btn" class="bg-red-600 hover:bg-red-800 text-white pl-2 pr-2 pt-1 pb-1 mr-2 rounded opacity-25" type="" name="" value="" onclick="btn_delete_prod()">刪除所選資料</button>
+				
 			</div>
 			<div class="data_room_L">
 				<div class="flex">
@@ -164,7 +169,7 @@
 										border-[#D4AEAE]">
 								<div class="hidden" >型號/料號</div>
 								<div class="inline-block w-full h-full relative" >
-									<div id="">
+									<div id="{{ $DataProdReference->ID }}">
 										<a class="text-fuchsia-900 hover:underline" href="{{ route('ProductDataManage.edit', $DataProdReference->Model ) }}">{{ $DataProdReference->Model }}</a>
 									</div>
 									<div>{{ $DataProdReference->SK_NO1 }}</div>
